@@ -7,12 +7,16 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { CoreModule } from './shared/core.module';
+import { ProjectsContainerComponent } from './features/projects/containers/projects-container/projects-container.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ProjectsContainerComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,

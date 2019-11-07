@@ -1,0 +1,53 @@
+{
+  "team": {
+    "name": "Some Team",
+    "description": "Some description of the team",
+    "members": [
+      {
+        "name": "David Huebner",
+        "role": "Developer",
+        "email": "davidmh.mail@gmail.com",
+        "favTech": ["JavaScript", "Angular", "Node", "Go"]
+      },
+      {
+        "name": "Joe Shmo",
+        "role": "Developer",
+        "email": "joe.shmo@gmail.com",
+        "favTech": ["JavaScript", "React", "Java", "Go"]
+      }
+    ],
+    "projects": [
+      {
+        "name": "Pomodor",
+        "description": "Time keeping and task list app that uses the pomodoro technique",
+        "uiPath": "https://pomodor.herokuapp.com/home",
+        "healthCheck": {
+          "path": "https://pomodor.herokuapp.com/home",
+          "successStatuses": [200]
+        },
+        "dependencies": [
+          {
+            "name": "some-api",
+            "description": "Some API that does important stuff",
+            "healthCheck": {
+              "path": "https://the-api.com/health",
+              "successStatuses": [200]
+            },
+            "dependencies": [
+              {
+                "name": "another-api",
+                "description": "Another API that does other stuff",
+                "healthCheck": {
+                  "path": "https://another-api.com/health",
+                  "successStatuses": [200]
+                },
+                "dependencies": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+

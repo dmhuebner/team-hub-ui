@@ -1,0 +1,24 @@
+.project-container {
+  border: 1px solid #ededed;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  background: #fff;
+
+  :hover {
+    //background-color: #cccccc;
+  }
+
+  .right-panel {
+    .up-badge {
+      background-color: green;
+      color: white;
+    }
+
+    .down-badge {
+      background-color: red;
+      color: white;
+    }
+  }
+}

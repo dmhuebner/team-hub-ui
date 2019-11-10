@@ -1,0 +1,13 @@
+<div class="project-container">
+  <div class="left-panel">
+    <h4>{{project.name}}</h4>
+    <p>{{project.description}}</p>
+  </div>
+  <div class="right-panel">
+    <div>
+      <p *ngIf="projectStatus.up" class="up-badge">UP</p>
+      <p *ngIf="!projectStatus.up" class="down-badge">DOWN</p>
+      <p>{{projectStatus.pathsChecked[0]}}</p>
+    </div>
+  </div>
+</div>

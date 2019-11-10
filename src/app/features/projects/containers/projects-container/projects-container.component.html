@@ -1,3 +1,14 @@
-<p>
-  projects-container works!
-</p>
+<section class="projects-container">
+  <header>
+    <h2>Projects</h2>
+  </header>
+  <section class="projcts-list">
+    <div class="project" *ngFor="let project of projectsConfig">
+      <app-project-list-item
+        [project]="project"
+        [projectStatus]="getProjectStatusObj(project.name)">
+      </app-project-list-item>
+    </div>
+  </section>
+</section>
+<pre>{{statusOverview | json}}</pre>

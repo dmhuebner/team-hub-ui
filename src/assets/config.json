@@ -20,15 +20,17 @@
       {
         "name": "Pomodor",
         "description": "Time keeping and task list app that uses the pomodoro technique",
+        "appType": "UI",
         "uiPath": "https://pomodor.herokuapp.com/home",
         "healthCheck": {
-          "path": "https://pomodor.herokuapp.com/home",
+          "path": "https://api.github.com/users/octocat",
           "successStatuses": [200]
         },
         "dependencies": [
           {
             "name": "some-api",
             "description": "Some API that does important stuff",
+            "appType": "API",
             "healthCheck": {
               "path": "https://the-api.com/health",
               "successStatuses": [200]
@@ -37,6 +39,7 @@
               {
                 "name": "another-api",
                 "description": "Another API that does other stuff",
+                "appType": "API",
                 "healthCheck": {
                   "path": "https://another-api.com/health",
                   "successStatuses": [200]
@@ -46,6 +49,30 @@
             ]
           }
         ]
+      },
+      {
+        "name": "Other Thing",
+        "description": "Some other thing that uses the pomodoro technique",
+        "uiPath": "https://other-thing.herokuapp.com/home",
+        "healthCheck": {
+          "path": "https://api.github.com/users/octocat",
+          "successStatuses": [
+            200
+          ]
+        },
+        "dependencies": []
+      },
+      {
+        "name": "And Another Thing",
+        "description": "Some other thing that uses the pomodoro technique",
+        "uiPath": "https://other-thing.herokuapp.com/home",
+        "healthCheck": {
+          "path": "https://api.github.com/users/octocat",
+          "successStatuses": [
+            200
+          ]
+        },
+        "dependencies": []
       }
     ]
   }

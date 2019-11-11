@@ -6,7 +6,8 @@
     <div class="project" *ngFor="let project of projectsConfig">
       <app-project-list-item
         [project]="project"
-        [projectStatus]="getProjectStatusObj(project.name)">
+        [projectStatus]="getProjectStatusObj(project.name)"
+        [dependencyStatuses]="getDependencyStatuses(project.name)">
       </app-project-list-item>
     </div>
   </section>

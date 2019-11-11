@@ -4,4 +4,5 @@ export default interface ProjectStatus {
     name: string;
     up: boolean;
     pathsChecked: PathChecked[];
+    dependencies?: ProjectStatus[];
 }

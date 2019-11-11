@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import HealthCheck from '../../../shared/interfaces/health-check.interface';
-import { catchError, take, takeLast, tap } from 'rxjs/operators';
+import { catchError, take, tap } from 'rxjs/operators';
 import ProjectStatus from '../../../shared/interfaces/project-status.interface';
 import StatusOverview from '../../../shared/interfaces/status-overview.interface';
 

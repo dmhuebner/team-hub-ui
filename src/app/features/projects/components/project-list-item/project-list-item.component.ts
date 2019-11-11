@@ -11,12 +11,20 @@ export class ProjectListItemComponent implements OnInit {
 
   @Input() project: Project;
   @Input() projectStatus: ProjectStatus;
-
-  up: boolean;
+  @Input() dependencyStatuses;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  dependencyDown(): boolean {
+    if (this.dependencyStatuses) {
+      return Object.values(this.dependencyStatuses).some(depStatus => {
+        // @ts-ignore
+        return !depStatus.up;
+      });
+    }
   }
 
 }

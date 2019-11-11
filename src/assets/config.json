@@ -47,6 +47,16 @@
                 "dependencies": []
               }
             ]
+          },
+          {
+            "name": "github-api",
+            "description": "Github API that does other stuff",
+            "appType": "API",
+            "healthCheck": {
+              "path": "https://api.github.com/users/octocat",
+              "successStatuses": [200]
+            },
+            "dependencies": []
           }
         ]
       },
@@ -72,7 +82,9 @@
             200
           ]
         },
-        "dependencies": []
+        "dependencies": [
+          {"name":"mke syeigrf wlv","description":"ddud boxni rauwc mpko ysit xho qhdpcdhr aiyasej","uiPath":"https://ddfjjfilfmfrppxdublipwhds/mhd","healthCheck":{"path":"https://api.github.com/users/octocat","successStatuses":[200]},"dependencies":[]}
+        ]
       }
     ]
   }

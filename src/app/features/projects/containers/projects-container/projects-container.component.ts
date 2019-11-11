@@ -32,7 +32,6 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
   }
 
   getProjectStatusObj(projectName: string): ProjectStatus {
-    console.log('statusOverview', this.statusOverview);
     const projectStatusObj = this.statusOverview.projectStatuses.find(status => status.name === projectName);
     return projectStatusObj || {name: projectName, pathsChecked: [], up: null};
   }
@@ -57,7 +56,7 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
 
   private getAllHealthChecks(projectsConfig: Project[], healthCheckCalls = []) {
     projectsConfig.forEach(projConfig => {
-      healthCheckCalls.push(this.statusService.getHealthCheckStatus(projConfig.name, projConfig.healthCheck));
+      healthCheckCalls.push(this.statusService.initHealthCheckLoop(projConfig.name, projConfig.healthCheck));
       if (projConfig.dependencies && projConfig.dependencies.length) {
         this.getAllHealthChecks(projConfig.dependencies, healthCheckCalls);
       }

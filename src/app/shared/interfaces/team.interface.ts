@@ -6,4 +6,5 @@ export default interface Team {
     description: string;
     members: TeamMember[];
     projects: Project[];
+    checkProjectsEvery: number;
 }

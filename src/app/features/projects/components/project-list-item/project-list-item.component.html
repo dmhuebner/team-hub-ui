@@ -12,7 +12,7 @@
   <div class="right-panel">
     <div>
       <p *ngIf="projectStatus.up && !dependencyDown()" class="up-badge">UP</p>
-      <p *ngIf="dependencyDown()" class="warning-badge">WARNING</p>
+      <p *ngIf="dependencyDown() && projectStatus.up" class="warning-badge">WARNING</p>
       <p *ngIf="!projectStatus.up" class="down-badge">DOWN</p>
       <p>{{projectStatus.pathsChecked[0]}}</p>
     </div>

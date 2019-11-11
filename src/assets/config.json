@@ -2,6 +2,12 @@
   "team": {
     "name": "Some Team",
     "description": "Some description of the team",
+    "checkProjectsEvery": 300000,
+    "resources": {
+      "repositories": "https://github.com/some-team",
+      "projectManagement": "https://jira.com/some-team",
+      "teamDocumentation": "https://confluence.com/some-team"
+    },
     "members": [
       {
         "name": "David Huebner",

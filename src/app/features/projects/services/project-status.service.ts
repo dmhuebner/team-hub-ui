@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, interval, Observable } from 'rxjs';
 import HealthCheck from '../../../shared/interfaces/health-check.interface';
-import { catchError, take, tap } from 'rxjs/operators';
+import { catchError, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import ProjectStatus from '../../../shared/interfaces/project-status.interface';
 import StatusOverview from '../../../shared/interfaces/status-overview.interface';
+import { ConfigService } from '../../../shared/services/config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,20 @@ export class ProjectStatusService {
     private statusOverviewSubject: BehaviorSubject<StatusOverview> = new BehaviorSubject<StatusOverview>(this.initStatusOverview());
     statusOverview$: Observable<StatusOverview> = this.statusOverviewSubject.asObservable();
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+                private configService: ConfigService) { }
+
+    initHealthCheckLoop(projectName, healthCheck: HealthCheck): Observable<any> {
+        return this.configService.currentConfig$.pipe(
+            map(config => config.team.checkProjectsEvery),
+            switchMap((intervalLength) => {
+                return interval(intervalLength).pipe(
+                    startWith(this.getHealthCheckStatus(projectName, healthCheck)),
+                    switchMap(() => this.getHealthCheckStatus(projectName, healthCheck).pipe(catchError((err) => err))),
+                );
+            })
+        );
+    }
 
     getHealthCheckStatus(projectName, healthCheck: HealthCheck): Observable<any> {
         return this.http.get(healthCheck.path, {observe: 'response'}).pipe(

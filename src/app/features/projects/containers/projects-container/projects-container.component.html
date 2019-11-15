@@ -1,10 +1,8 @@
 <section class="projects-container">
-  <header>
-    <h2>Projects</h2>
-  </header>
   <section class="projects-list">
     <div class="project" *ngFor="let project of projectsConfig">
       <app-project-list-item
+        [routerLink]="project.name"
         [project]="project"
         [projectStatus]="getProjectStatusObj(project.name)"
         [dependencyStatuses]="getDependencyStatuses(project.name)">
@@ -13,3 +11,4 @@
   </section>
 </section>
 <pre>{{statusOverview | json}}</pre>
+<pre>config {{projectsConfig | json}}</pre>

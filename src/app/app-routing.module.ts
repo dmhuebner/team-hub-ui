@@ -7,7 +7,10 @@ import { ProjectsPageComponent } from './pages/projects/projects-page.component'
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'projects', component: ProjectsPageComponent },
+  { path: 'projects',
+    component: ProjectsPageComponent,
+    loadChildren: () => import('./features/projects/projects.module').then(m => m.ProjectsModule),
+  },
   { path: '**', component: NotFoundComponent }
 ];
 

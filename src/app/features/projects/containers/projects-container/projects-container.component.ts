@@ -1,10 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import Project from '../../../../shared/interfaces/projects.interface';
+import Project from '../../../../shared/interfaces/project.interface';
 import { ProjectStatusService } from '../../services/project-status.service';
 import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
 import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
-import { forkJoin, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ProjectConfigService } from '../../services/project-config.service';
 
 @Component({
   selector: 'app-projects-container',
@@ -13,17 +14,22 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ProjectsContainerComponent implements OnInit, OnDestroy {
 
-  @Input() projectsConfig: Project[];
-
+  projectsConfig: Project[];
   statusOverview: StatusOverview;
   unsubscribe$: Subject<boolean> = new Subject();
 
-  constructor(private statusService: ProjectStatusService) { }
+  constructor(private statusService: ProjectStatusService,
+              private projectConfigService: ProjectConfigService) { }
 
   ngOnInit() {
+    this.projectConfigService.projectsConfig$.pipe(
+        takeUntil(this.unsubscribe$)
+    ).subscribe((config) => this.projectsConfig = config);
+
     this.getAllHealthChecks(this.projectsConfig).forEach(hc => {
       hc.pipe(takeUntil(this.unsubscribe$)).subscribe();
     });
+
     this.statusService.statusOverview$.pipe(takeUntil(this.unsubscribe$)).subscribe(statusOverview => this.statusOverview = statusOverview);
   }
 

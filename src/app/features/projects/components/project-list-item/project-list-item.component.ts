@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import Project from '../../../../shared/interfaces/projects.interface';
+import Project from '../../../../shared/interfaces/project.interface';
 import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
 
 @Component({

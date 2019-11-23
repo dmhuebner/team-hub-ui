@@ -6,13 +6,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProjectContainerComponent } from './containers/project-container/project-container.component';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { ProjectsShellComponent } from './containers/projects-shell/projects-shell.component';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
+import { ProjectDependenciesComponent } from './components/project-dependencies/project-dependencies.component';
 
 @NgModule({
   declarations: [
       ProjectsContainerComponent,
       ProjectListItemComponent,
       ProjectContainerComponent,
-      ProjectsShellComponent
+      ProjectsShellComponent,
+      ProjectDetailsComponent,
+      ProjectDependenciesComponent
   ],
   imports: [
       CommonModule,

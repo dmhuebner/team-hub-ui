@@ -1,4 +1,10 @@
-<p>
-  project-container works!
-</p>
-{{project | json}}
+<section class="project-container">
+  <app-project-details
+          [project]="project"
+          [projectStatus]="getProjectStatusObj(project.name)">
+  </app-project-details>
+  <app-project-dependencies
+          [dependencies]="project.dependencies"
+          [statusOverview]="statusOverview">
+  </app-project-dependencies>
+</section>

@@ -14,12 +14,10 @@ export class ProjectsShellComponent implements OnInit, OnChanges {
   constructor(private projectConfigService: ProjectConfigService) { }
 
   ngOnInit() {
-    console.log('config', this.projectsConfig);
     this.projectConfigService.updateConfig(this.projectsConfig);
   }
 
   ngOnChanges() {
-    console.log('CHANGES config', this.projectsConfig);
     this.projectConfigService.updateConfig(this.projectsConfig);
   }
 }

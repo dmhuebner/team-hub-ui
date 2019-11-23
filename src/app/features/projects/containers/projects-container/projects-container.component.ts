@@ -4,7 +4,7 @@ import { ProjectStatusService } from '../../services/project-status.service';
 import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
 import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { catchError, takeUntil } from 'rxjs/operators';
 import { ProjectConfigService } from '../../services/project-config.service';
 
 @Component({
@@ -14,7 +14,9 @@ import { ProjectConfigService } from '../../services/project-config.service';
 })
 export class ProjectsContainerComponent implements OnInit, OnDestroy {
 
-  projectsConfig: Project[];
+  @Input() projectsConfig: Project[];
+
+  headingText = 'Projects';
   statusOverview: StatusOverview;
   unsubscribe$: Subject<boolean> = new Subject();
 
@@ -22,11 +24,14 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
               private projectConfigService: ProjectConfigService) { }
 
   ngOnInit() {
-    this.projectConfigService.projectsConfig$.pipe(
-        takeUntil(this.unsubscribe$)
-    ).subscribe((config) => this.projectsConfig = config);
 
-    this.getAllHealthChecks(this.projectsConfig).forEach(hc => {
+    if (!this.projectsConfig) {
+      this.projectConfigService.projectsConfig$.pipe(
+          takeUntil(this.unsubscribe$)
+      ).subscribe((config) => this.projectsConfig = config);
+    }
+
+    this.statusService.getAllHealthChecks(this.projectsConfig).forEach(hc => {
       hc.pipe(takeUntil(this.unsubscribe$)).subscribe();
     });
 
@@ -55,19 +60,8 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
           console.error('The dependency does not have a "name" property', dep);
         }
       });
-      console.log('dependencyStatuses', dependencyStatuses);
       return dependencyStatuses;
     }
-  }
-
-  private getAllHealthChecks(projectsConfig: Project[], healthCheckCalls = []) {
-    projectsConfig.forEach(projConfig => {
-      healthCheckCalls.push(this.statusService.initHealthCheckLoop(projConfig.name, projConfig.healthCheck));
-      if (projConfig.dependencies && projConfig.dependencies.length) {
-        this.getAllHealthChecks(projConfig.dependencies, healthCheckCalls);
-      }
-    });
-    return healthCheckCalls;
   }
 
 }

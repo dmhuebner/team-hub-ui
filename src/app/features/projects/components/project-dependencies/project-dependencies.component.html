@@ -1,0 +1,12 @@
+<section class="projects-container">
+  <section class="projects-list">
+    <div class="project" *ngFor="let project of dependencies">
+      <app-project-list-item
+              [routerLink]="project.name"
+              [project]="project"
+              [projectStatus]="getProjectStatusObj(project.name)"
+              [dependencyStatuses]="getDependencyStatuses(project.name)">
+      </app-project-list-item>
+    </div>
+  </section>
+</section>

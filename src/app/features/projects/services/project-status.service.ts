@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, interval, Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin, interval, Observable } from 'rxjs';
 import HealthCheck from '../../../shared/interfaces/health-check.interface';
-import { catchError, map, startWith, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, combineAll, map, startWith, switchMap, take, tap, zipAll } from 'rxjs/operators';
 import ProjectStatus from '../../../shared/interfaces/project-status.interface';
 import StatusOverview from '../../../shared/interfaces/status-overview.interface';
 import { ConfigService } from '../../../shared/services/config.service';
+import Project from '../../../shared/interfaces/project.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,15 @@ export class ProjectStatusService {
                 return interval(intervalLength).pipe(
                     startWith(this.getHealthCheckStatus(projectName, healthCheck)),
                     switchMap(() => this.getHealthCheckStatus(projectName, healthCheck).pipe(catchError((err) => err))),
+                    catchError(err => {
+                        console.error(err);
+                        return err;
+                    })
                 );
+            }),
+            catchError(err => {
+                console.error(err);
+                return err;
             })
         );
     }
@@ -71,6 +80,22 @@ export class ProjectStatusService {
             up: healthCheck.successStatuses.includes(healthCheckResponse.status)
         };
         this.updateProjectStatus(projectStatus);
+    }
+
+    getAllHealthChecks(projectsConfig: Project[], healthCheckCalls = []) {
+        projectsConfig.forEach(projConfig => {
+            healthCheckCalls.push(this.initHealthCheckLoop(projConfig.name, projConfig.healthCheck));
+            if (projConfig.dependencies && projConfig.dependencies.length) {
+                this.getAllHealthChecks(projConfig.dependencies, healthCheckCalls);
+            }
+        });
+        return healthCheckCalls;
+    }
+
+    // TODO combine all into one?
+    allHealthChecks$(projectsConfig: Project[]) {
+        const healthCheckList = this.getAllHealthChecks(projectsConfig);
+        return combineAll();
     }
 
 

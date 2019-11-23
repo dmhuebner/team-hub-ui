@@ -5,7 +5,16 @@ import { ProjectContainerComponent } from './containers/project-container/projec
 
 export const projectsRoutes: Routes = [
   { path: '', component: ProjectsContainerComponent },
-  { path: ':name', component: ProjectContainerComponent },
+  { path: ':dep', component: ProjectContainerComponent },
+  { path: ':dep/:dep2', component: ProjectContainerComponent },
+  { path: ':dep/:dep2/:dep3', component: ProjectContainerComponent },
+  { path: ':dep/:dep2/:dep3/:dep4', component: ProjectContainerComponent },
+  { path: ':dep/:dep2/:dep3/:dep4/:dep5', component: ProjectContainerComponent },
+  { path: ':dep/:dep2/:dep3/:dep4/:dep5/:dep6', component: ProjectContainerComponent },
+  { path: ':dep/:dep2/:dep3/:dep4/:dep5/:dep6/:dep7', component: ProjectContainerComponent },
+  { path: ':dep/:dep2/:dep3/:dep4/:dep5/:dep6/:dep7/:dep8', component: ProjectContainerComponent },
+  { path: ':dep/:dep2/:dep3/:dep4/:dep5/:dep6/:dep7/:dep8/:dep9', component: ProjectContainerComponent },
+  { path: ':dep/:dep2/:dep3/:dep4/:dep5/:dep6/:dep7/:dep8/:dep9/:dep10', component: ProjectContainerComponent },
 ];
 
 @NgModule({

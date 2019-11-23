@@ -4,7 +4,7 @@ import { ProjectStatusService } from '../../services/project-status.service';
 import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
 import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
 import { Subject } from 'rxjs';
-import { catchError, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { ProjectConfigService } from '../../services/project-config.service';
 
 @Component({
@@ -16,7 +16,6 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
 
   @Input() projectsConfig: Project[];
 
-  headingText = 'Projects';
   statusOverview: StatusOverview;
   unsubscribe$: Subject<boolean> = new Subject();
 
@@ -24,18 +23,25 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
               private projectConfigService: ProjectConfigService) { }
 
   ngOnInit() {
-
     if (!this.projectsConfig) {
       this.projectConfigService.projectsConfig$.pipe(
           takeUntil(this.unsubscribe$)
       ).subscribe((config) => this.projectsConfig = config);
     }
 
-    this.statusService.getAllHealthChecks(this.projectsConfig).forEach(hc => {
-      hc.pipe(takeUntil(this.unsubscribe$)).subscribe();
+    this.statusService.statusMonitorOn$.pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe((monitorIsOn) => {
+      if (!monitorIsOn) {
+        this.statusService.getAllHealthChecks(this.projectsConfig).forEach(hc => {
+          hc.pipe(takeUntil(this.unsubscribe$)).subscribe();
+        });
+      }
     });
 
-    this.statusService.statusOverview$.pipe(takeUntil(this.unsubscribe$)).subscribe(statusOverview => this.statusOverview = statusOverview);
+    this.statusService.statusOverview$.pipe(
+        takeUntil(this.unsubscribe$)
+    ).subscribe(statusOverview => this.statusOverview = statusOverview);
   }
 
   ngOnDestroy(): void {

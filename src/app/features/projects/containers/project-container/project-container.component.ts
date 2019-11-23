@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import Project from '../../../../shared/interfaces/project.interface';
 import { ProjectConfigService } from '../../services/project-config.service';
 import { Subject } from 'rxjs';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ProjectStatusService } from '../../services/project-status.service';
 import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
 import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
@@ -32,10 +32,13 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
     this.projectsConfigService.projectsConfig$.pipe(
         tap(projects => this.projectsConfig = projects),
         map(projects => this.getProject(projects)),
+        tap(project => this.project = project),
+        switchMap(() => this.statusService.statusMonitorOn$),
         takeUntil(this.unsubscribe$)
-    ).subscribe((project) => {
-      this.project = project;
-      this.statusService.getAllHealthChecks(this.projectsConfig).forEach(hc => hc.pipe(takeUntil(this.unsubscribe$)).subscribe());
+    ).subscribe((monitorIsOn) => {
+      if (!monitorIsOn) {
+        this.statusService.getAllHealthChecks(this.projectsConfig).forEach(hc => hc.pipe(takeUntil(this.unsubscribe$)).subscribe());
+      }
     });
   }
 

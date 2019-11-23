@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, forkJoin, interval, Observable } from 'rxjs';
+import { BehaviorSubject, interval, Observable, of } from 'rxjs';
 import HealthCheck from '../../../shared/interfaces/health-check.interface';
-import { catchError, combineAll, map, startWith, switchMap, take, tap, zipAll } from 'rxjs/operators';
+import { catchError, combineAll, map, shareReplay, startWith, switchMap, take, tap } from 'rxjs/operators';
 import ProjectStatus from '../../../shared/interfaces/project-status.interface';
 import StatusOverview from '../../../shared/interfaces/status-overview.interface';
 import { ConfigService } from '../../../shared/services/config.service';
@@ -16,26 +16,23 @@ export class ProjectStatusService {
     private statusOverviewSubject: BehaviorSubject<StatusOverview> = new BehaviorSubject<StatusOverview>(this.initStatusOverview());
     statusOverview$: Observable<StatusOverview> = this.statusOverviewSubject.asObservable();
 
+    private statusMonitorOnSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    statusMonitorOn$: Observable<boolean> = this.statusMonitorOnSubject.asObservable();
+
     constructor(private http: HttpClient,
                 private configService: ConfigService) { }
 
     initHealthCheckLoop(projectName, healthCheck: HealthCheck): Observable<any> {
+        this.statusMonitorOnSubject.next(true);
         return this.configService.currentConfig$.pipe(
             map(config => config.team.checkProjectsEvery),
             switchMap((intervalLength) => {
                 return interval(intervalLength).pipe(
                     startWith(this.getHealthCheckStatus(projectName, healthCheck)),
-                    switchMap(() => this.getHealthCheckStatus(projectName, healthCheck).pipe(catchError((err) => err))),
-                    catchError(err => {
-                        console.error(err);
-                        return err;
-                    })
+                    switchMap(() => this.getHealthCheckStatus(projectName, healthCheck))
                 );
             }),
-            catchError(err => {
-                console.error(err);
-                return err;
-            })
+            shareReplay(1)
         );
     }
 
@@ -46,7 +43,7 @@ export class ProjectStatusService {
             }),
             catchError(errResp => {
                 this.setProjectStatus(projectName, healthCheck, errResp);
-                throw errResp;
+                return of(errResp);
             })
         );
     }

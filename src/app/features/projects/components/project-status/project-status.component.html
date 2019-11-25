@@ -1,0 +1,11 @@
+<div class="project-status-container" [class.small]="small">
+  <div *ngIf="projectStatus.up && !dependencyDown()" class="project-status up">
+    <mat-icon>offline_bolt</mat-icon>
+  </div>
+  <div *ngIf="dependencyDown() && projectStatus.up" class="project-status warning">
+    <mat-icon>offline_bolt</mat-icon>
+  </div>
+  <div *ngIf="!projectStatus.up" class="project-status">
+    <mat-icon>close</mat-icon>
+  </div>
+</div>

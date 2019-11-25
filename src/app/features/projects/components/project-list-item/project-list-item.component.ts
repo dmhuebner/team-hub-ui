@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Project from '../../../../shared/interfaces/project.interface';
 import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
+import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
 
 @Component({
   selector: 'app-project-list-item',
@@ -12,19 +13,11 @@ export class ProjectListItemComponent implements OnInit {
   @Input() project: Project;
   @Input() projectStatus: ProjectStatus;
   @Input() dependencyStatuses;
+  @Input() statusOverview: StatusOverview;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  dependencyDown(): boolean {
-    if (this.dependencyStatuses) {
-      return Object.values(this.dependencyStatuses).some(depStatus => {
-        // @ts-ignore
-        return !depStatus.up;
-      });
-    }
   }
 
 }

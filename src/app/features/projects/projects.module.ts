@@ -8,6 +8,9 @@ import { ProjectsRoutingModule } from './projects-routing.module';
 import { ProjectsShellComponent } from './containers/projects-shell/projects-shell.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { ProjectDependenciesComponent } from './components/project-dependencies/project-dependencies.component';
+import { ProjectStatusComponent } from './components/project-status/project-status.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,16 @@ import { ProjectDependenciesComponent } from './components/project-dependencies/
       ProjectContainerComponent,
       ProjectsShellComponent,
       ProjectDetailsComponent,
-      ProjectDependenciesComponent
+      ProjectDependenciesComponent,
+      ProjectStatusComponent
   ],
-  imports: [
-      CommonModule,
-      HttpClientModule,
-      ProjectsRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        HttpClientModule,
+        ProjectsRoutingModule,
+        MatIconModule,
+        MatButtonModule
+    ],
   exports: [
       ProjectsShellComponent
   ]

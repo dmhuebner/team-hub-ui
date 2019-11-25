@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ProjectStatusService } from '../../services/project-status.service';
 import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
-import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-project-container',
@@ -21,8 +21,9 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<boolean> = new Subject();
 
   constructor(private route: ActivatedRoute,
+              private location: Location,
               private projectsConfigService: ProjectConfigService,
-              private statusService: ProjectStatusService) { }
+              public statusService: ProjectStatusService) { }
 
   ngOnInit() {
     this.statusService.statusOverview$.pipe(
@@ -46,11 +47,15 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next(true);
   }
 
-  // TODO this code is duplicated from ProjectsContainer :(
-  getProjectStatusObj(projectName: string): ProjectStatus {
-    const projectStatusObj = this.statusOverview.projectStatuses.find(status => status.name === projectName);
-    return projectStatusObj || {name: projectName, pathsChecked: [], up: null};
+  goBack() {
+    this.location.back();
   }
+
+  // TODO this code is duplicated from ProjectsContainer :(
+  // getProjectStatusObj(projectName: string): ProjectStatus {
+  //   const projectStatusObj = this.statusOverview.projectStatuses.find(status => status.name === projectName);
+  //   return projectStatusObj || {name: projectName, pathsChecked: [], up: null};
+  // }
 
   private getProject(projects: Project[]) {
     const routeParams = this.route.snapshot.paramMap.keys;

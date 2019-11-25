@@ -95,5 +95,27 @@ export class ProjectStatusService {
         return combineAll();
     }
 
+    getProjectStatusObj(projectName: string, statusOverview: StatusOverview): ProjectStatus {
+        const projectStatusObj = statusOverview.projectStatuses.find(status => status.name === projectName);
+        return projectStatusObj || {name: projectName, pathsChecked: [], up: null};
+    }
+
+    getDependencyStatuses(projectName: string, projectsConfig: Project[], statusOverview: StatusOverview, dependencyStatuses = {}) {
+        const project = projectsConfig.find(proj => proj.name === projectName);
+        if (project && project.dependencies && project.dependencies.length) {
+            project.dependencies.forEach(dep => {
+                if (dep.name) {
+                    dependencyStatuses[dep.name] = this.getProjectStatusObj(dep.name, statusOverview);
+                    if (dep.dependencies && dep.dependencies.length) {
+                        this.getDependencyStatuses(dep.name, projectsConfig, statusOverview, dependencyStatuses);
+                    }
+                } else {
+                    console.error('The dependency does not have a "name" property', dep);
+                }
+            });
+            return dependencyStatuses;
+        }
+    }
+
 
 }

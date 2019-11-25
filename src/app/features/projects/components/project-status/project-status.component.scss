@@ -1,0 +1,37 @@
+.project-status-container {
+  margin: 1rem;
+  color: #fff;
+  display: inline-block;
+
+  .project-status {
+    background: red;
+    padding: 3rem;
+    border-radius: 50% 50%;
+    margin-right: 0;
+
+    mat-icon {
+      font-size: 3rem;
+      margin-right: 1.3rem;
+    }
+
+    &.up {
+      background: green;
+    }
+
+    &.warning {
+      background: orange;
+    }
+  }
+}
+
+.project-status-container.small {
+  .project-status {
+    padding: 0.3rem 0.3rem;
+    text-align: center;
+    width: 1.5rem;
+
+    mat-icon {
+      font-size: 1.3rem;
+    }
+  }
+}

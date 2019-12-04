@@ -1,19 +1,38 @@
 <div class="project-container">
   <div class="left-panel">
-    <h4>{{project.name}}</h4>
+    <h3>{{project.name}}</h3>
+    <hr>
+    <h5>Description:</h5>
     <p>{{project.description}}</p>
+    <h5 *ngIf="project.dependencies && project.dependencies.length">Dependencies:</h5>
     <ng-container *ngIf="project.dependencies && project.dependencies.length">
       <div *ngFor="let dep of project.dependencies">
         <span>{{dep.name}}</span>
-        <span> - up: {{dependencyStatuses[dep.name].up}}</span>
+        <span> -
+          <app-project-status
+                  [projectStatus]="dependencyStatuses[dep.name]"
+                  [dependencyStatuses]="dependencyStatuses"
+                  [statusOverview]="statusOverview"
+                  small="true">
+          </app-project-status>
+        </span>
       </div>
     </ng-container>
   </div>
   <div class="right-panel">
     <div>
-      <p *ngIf="projectStatus.up && !dependencyDown()" class="up-badge">UP</p>
-      <p *ngIf="dependencyDown() && projectStatus.up" class="warning-badge">WARNING</p>
-      <p *ngIf="!projectStatus.up" class="down-badge">DOWN</p>
+      <div class="project-status">
+        <app-project-status
+                [projectStatus]="projectStatus"
+                [dependencyStatuses]="dependencyStatuses"
+                [statusOverview]="statusOverview"
+                small="true">
+        </app-project-status>
+      </div>
+<!--      <p *ngIf="projectStatus.up && !dependencyDown()" class="up-badge">UP</p>-->
+<!--      <p *ngIf="dependencyDown() && projectStatus.up" class="warning-badge">WARNING</p>-->
+<!--      <p *ngIf="!projectStatus.up" class="down-badge">DOWN</p>-->
+      <p><b>Paths Checked:</b></p>
       <p>{{projectStatus.pathsChecked[0]}}</p>
     </div>
   </div>

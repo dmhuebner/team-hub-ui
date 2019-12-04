@@ -1,5 +1,5 @@
 <section class="projects-container">
   <ng-container *ngIf="configService.currentConfig$ | async as currentConfig">
-    <app-projects-container [projectsConfig]="currentConfig.team.projects"></app-projects-container>
+      <app-projects-shell [projectsConfig]="currentConfig.team.projects"></app-projects-shell>
   </ng-container>
 </section>

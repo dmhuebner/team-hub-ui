@@ -2,7 +2,7 @@
   "team": {
     "name": "Some Team",
     "description": "Some description of the team",
-    "checkProjectsEvery": 300000,
+    "checkProjectsEvery": 900000,
     "resources": {
       "repositories": "https://github.com/some-team",
       "projectManagement": "https://jira.com/some-team",
@@ -38,7 +38,7 @@
             "description": "Some API that does important stuff",
             "appType": "API",
             "healthCheck": {
-              "path": "https://the-api.com/health",
+              "path": "https://api.github.com/users/octocat",
               "successStatuses": [200]
             },
             "dependencies": [

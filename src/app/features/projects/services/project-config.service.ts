@@ -7,12 +7,17 @@ import Project from '../../../shared/interfaces/project.interface';
 })
 export class ProjectConfigService {
 
-  private projectsConfigSubject: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
-  projectsConfig$: Observable<Project[]> = this.projectsConfigSubject.asObservable();
+  private projectsConfigSubject = new BehaviorSubject<ProjectsConfig>({projects: [], intervalLength: 600000});
+  projectsConfig$ = this.projectsConfigSubject.asObservable();
 
   constructor() { }
 
-  updateConfig(config: Project[]) {
+  updateConfig(config: ProjectsConfig) {
     this.projectsConfigSubject.next(config);
   }
+}
+
+interface ProjectsConfig {
+  projects: Project[];
+  intervalLength: number;
 }

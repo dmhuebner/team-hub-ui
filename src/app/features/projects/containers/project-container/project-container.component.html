@@ -4,12 +4,10 @@
 <section class="project-container">
   <app-project-details
           [project]="project"
-          [projectStatus]="statusService.getProjectStatusObj(project.name, statusOverview)"
-          [statusOverview]="statusOverview"
-          [dependencyStatuses]="statusService.getDependencyStatuses(project.name, projectsConfig, statusOverview)">
+          [projectStatus]="projectsStatus">
   </app-project-details>
   <app-project-dependencies
           [dependencies]="project.dependencies"
-          [statusOverview]="statusOverview">
+          [projectsStatus]="projectsStatus">
   </app-project-dependencies>
 </section>

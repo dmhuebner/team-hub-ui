@@ -15,6 +15,7 @@ export const projectsRoutes: Routes = [
   { path: ':dep/:dep2/:dep3/:dep4/:dep5/:dep6/:dep7/:dep8', component: ProjectContainerComponent },
   { path: ':dep/:dep2/:dep3/:dep4/:dep5/:dep6/:dep7/:dep8/:dep9', component: ProjectContainerComponent },
   { path: ':dep/:dep2/:dep3/:dep4/:dep5/:dep6/:dep7/:dep8/:dep9/:dep10', component: ProjectContainerComponent },
+    // TODO add wildcard catch page for dependencies deeper than 10
 ];
 
 @NgModule({

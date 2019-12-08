@@ -1,11 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import Project from '../../../../shared/interfaces/project.interface';
 import { ProjectStatusService } from '../../services/project-status.service';
-import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
-import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ProjectConfigService } from '../../services/project-config.service';
+import ProjectsStatusOverview from '../../interfaces/projects-status-overview.interface';
 
 @Component({
   selector: 'app-projects-container',
@@ -15,59 +14,36 @@ import { ProjectConfigService } from '../../services/project-config.service';
 export class ProjectsContainerComponent implements OnInit, OnDestroy {
 
   @Input() projectsConfig: Project[];
+  @Input() intervalLength: number;
 
-  statusOverview: StatusOverview;
+  projectsStatusOverview: ProjectsStatusOverview;
   unsubscribe$: Subject<boolean> = new Subject();
 
-  constructor(private statusService: ProjectStatusService,
+  constructor(public statusService: ProjectStatusService,
               private projectConfigService: ProjectConfigService) { }
 
   ngOnInit() {
     if (!this.projectsConfig) {
       this.projectConfigService.projectsConfig$.pipe(
           takeUntil(this.unsubscribe$)
-      ).subscribe((config) => this.projectsConfig = config);
+      ).subscribe((config) => {
+        this.projectsConfig = config.projects;
+        this.intervalLength = config.intervalLength;
+        if (!this.statusService.projectsMonitorOn) {
+          this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
+        }
+      });
     }
 
-    this.statusService.statusMonitorOn$.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe((monitorIsOn) => {
-      if (!monitorIsOn) {
-        this.statusService.getAllHealthChecks(this.projectsConfig).forEach(hc => {
-          hc.pipe(takeUntil(this.unsubscribe$)).subscribe();
-        });
-      }
-    });
-
-    this.statusService.statusOverview$.pipe(
+    this.statusService.projectsStatusMonitor$.pipe(
         takeUntil(this.unsubscribe$)
-    ).subscribe(statusOverview => this.statusOverview = statusOverview);
+    ).subscribe(msgToClient => {
+      this.projectsStatusOverview = msgToClient;
+    });
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next(true);
-  }
-
-  getProjectStatusObj(projectName: string): ProjectStatus {
-    const projectStatusObj = this.statusOverview.projectStatuses.find(status => status.name === projectName);
-    return projectStatusObj || {name: projectName, pathsChecked: [], up: null};
-  }
-
-  getDependencyStatuses(projectName: string, dependencyStatuses = {}) {
-    const project = this.projectsConfig.find(proj => proj.name === projectName);
-    if (project && project.dependencies && project.dependencies.length) {
-      project.dependencies.forEach(dep => {
-        if (dep.name) {
-          dependencyStatuses[dep.name] = this.getProjectStatusObj(dep.name);
-          if (dep.dependencies && dep.dependencies.length) {
-            this.getDependencyStatuses(dep.name, dependencyStatuses);
-          }
-        } else {
-          console.error('The dependency does not have a "name" property', dep);
-        }
-      });
-      return dependencyStatuses;
-    }
   }
 
 }

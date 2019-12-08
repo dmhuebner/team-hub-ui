@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  websocket_url: 'http://localhost:5005/projects-monitor'
 };

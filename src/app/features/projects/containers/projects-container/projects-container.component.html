@@ -2,16 +2,13 @@
   <h1 class="heading">Projects</h1>
 </header>
 <section class="projects-container">
-  <section class="projects-list">
+  <section class="projects-list" *ngIf="projectsStatusOverview && projectsConfig">
     <div class="project" *ngFor="let project of projectsConfig">
       <app-project-list-item
         [routerLink]="project.name"
         [project]="project"
-        [projectStatus]="getProjectStatusObj(project.name)"
-        [dependencyStatuses]="getDependencyStatuses(project.name)">
+        [projectStatus]="projectsStatusOverview[project.name]">
       </app-project-list-item>
     </div>
   </section>
 </section>
-<!--<pre>{{ statusOverview | json }}</pre>-->
-<!--<pre>config {{ projectsConfig | json }}</pre>-->

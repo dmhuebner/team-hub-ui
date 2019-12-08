@@ -1,5 +1,7 @@
-<div class="project-container">
+<div class="project-container" *ngIf="projectStatus">
   <div class="left-panel">
+<!--    <pre>ProjectStatus: {{projectStatus | json}}</pre>-->
+<!--    <pre>ProjectObj: {{project | json}}</pre>-->
     <h3>{{project.name}}</h3>
     <hr>
     <h5>Description:</h5>
@@ -10,9 +12,7 @@
         <span>{{dep.name}}</span>
         <span> -
           <app-project-status
-                  [projectStatus]="dependencyStatuses[dep.name]"
-                  [dependencyStatuses]="dependencyStatuses"
-                  [statusOverview]="statusOverview"
+                  [projectStatus]="projectStatus.dependencies[dep.name]"
                   small="true">
           </app-project-status>
         </span>
@@ -24,16 +24,12 @@
       <div class="project-status">
         <app-project-status
                 [projectStatus]="projectStatus"
-                [dependencyStatuses]="dependencyStatuses"
-                [statusOverview]="statusOverview"
                 small="true">
         </app-project-status>
       </div>
-<!--      <p *ngIf="projectStatus.up && !dependencyDown()" class="up-badge">UP</p>-->
-<!--      <p *ngIf="dependencyDown() && projectStatus.up" class="warning-badge">WARNING</p>-->
-<!--      <p *ngIf="!projectStatus.up" class="down-badge">DOWN</p>-->
-      <p><b>Paths Checked:</b></p>
-      <p>{{projectStatus.pathsChecked[0]}}</p>
+      <p><b>Path Checked:</b></p>
+      <p>{{projectStatus.status.path}}</p>
+        <p>Status: {{projectStatus.status.status}}</p>
     </div>
   </div>
 </div>

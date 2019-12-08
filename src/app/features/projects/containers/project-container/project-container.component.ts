@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Project from '../../../../shared/interfaces/project.interface';
 import { ProjectConfigService } from '../../services/project-config.service';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ProjectStatusService } from '../../services/project-status.service';
-import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
 import { Location } from '@angular/common';
+import ProjectsStatus from '../../interfaces/projects-status.interface';
 
 @Component({
   selector: 'app-project-container',
@@ -17,7 +17,8 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
 
   project: Project;
   projectsConfig: Project[];
-  statusOverview: StatusOverview;
+  intervalLength: number;
+  projectsStatus: ProjectsStatus;
   unsubscribe$: Subject<boolean> = new Subject();
 
   constructor(private route: ActivatedRoute,
@@ -26,21 +27,19 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
               public statusService: ProjectStatusService) { }
 
   ngOnInit() {
-    this.statusService.statusOverview$.pipe(
-        takeUntil(this.unsubscribe$)
-    ).subscribe(statusOverview => this.statusOverview = statusOverview);
-
     this.projectsConfigService.projectsConfig$.pipe(
-        tap(projects => this.projectsConfig = projects),
-        map(projects => this.getProject(projects)),
+        tap(projectsConfig => {
+          this.projectsConfig = projectsConfig.projects;
+          this.intervalLength = projectsConfig.intervalLength;
+          if (!this.statusService.projectsMonitorOn) {
+            this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
+          }
+        }),
+        map(projectsConfig => this.getProject(projectsConfig.projects)),
         tap(project => this.project = project),
-        switchMap(() => this.statusService.statusMonitorOn$),
+        switchMap(() => this.getProjectStatus()),
         takeUntil(this.unsubscribe$)
-    ).subscribe((monitorIsOn) => {
-      if (!monitorIsOn) {
-        this.statusService.getAllHealthChecks(this.projectsConfig).forEach(hc => hc.pipe(takeUntil(this.unsubscribe$)).subscribe());
-      }
-    });
+    ).subscribe(statusOverview => this.projectsStatus = statusOverview);
   }
 
   ngOnDestroy(): void {
@@ -50,12 +49,6 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
   goBack() {
     this.location.back();
   }
-
-  // TODO this code is duplicated from ProjectsContainer :(
-  // getProjectStatusObj(projectName: string): ProjectStatus {
-  //   const projectStatusObj = this.statusOverview.projectStatuses.find(status => status.name === projectName);
-  //   return projectStatusObj || {name: projectName, pathsChecked: [], up: null};
-  // }
 
   private getProject(projects: Project[]) {
     const routeParams = this.route.snapshot.paramMap.keys;
@@ -71,6 +64,23 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
         }
       }, rootProject);
     }
+  }
+
+  private getProjectStatus(): Observable<ProjectsStatus> {
+    return this.statusService.projectsStatusMonitor$.pipe(
+        map(statusOverview => {
+          const routeParams = this.route.snapshot.paramMap.keys;
+          const dependencyList = routeParams.map(param => this.route.snapshot.paramMap.get(param));
+          return dependencyList.reduce((status, dep, i) => {
+            if (dependencyList.length > i + 1) {
+              return status[dep].dependencies;
+            } else {
+              return status[dep];
+            }
+          }, statusOverview);
+        }),
+        takeUntil(this.unsubscribe$)
+    );
   }
 
 }

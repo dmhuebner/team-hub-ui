@@ -10,14 +10,15 @@ import { ProjectConfigService } from '../../services/project-config.service';
 export class ProjectsShellComponent implements OnInit, OnChanges {
 
   @Input() projectsConfig: Project[];
+  @Input() intervalLength: number;
 
   constructor(private projectConfigService: ProjectConfigService) { }
 
   ngOnInit() {
-    this.projectConfigService.updateConfig(this.projectsConfig);
+    this.projectConfigService.updateConfig({projects: this.projectsConfig, intervalLength: this.intervalLength});
   }
 
   ngOnChanges() {
-    this.projectConfigService.updateConfig(this.projectsConfig);
+    this.projectConfigService.updateConfig({projects: this.projectsConfig, intervalLength: this.intervalLength});
   }
 }

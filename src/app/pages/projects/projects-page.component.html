@@ -1,5 +1,8 @@
 <section class="projects-container">
   <ng-container *ngIf="configService.currentConfig$ | async as currentConfig">
-      <app-projects-shell [projectsConfig]="currentConfig.team.projects"></app-projects-shell>
+      <app-projects-shell
+              [projectsConfig]="currentConfig.team.projects"
+              [intervalLength]="currentConfig.team.checkProjectsEvery">
+      </app-projects-shell>
   </ng-container>
 </section>

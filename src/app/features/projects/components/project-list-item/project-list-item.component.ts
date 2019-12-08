@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Project from '../../../../shared/interfaces/project.interface';
-import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
-import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
+import ProjectsStatus from '../../interfaces/projects-status.interface';
 
 @Component({
   selector: 'app-project-list-item',
@@ -11,9 +10,7 @@ import StatusOverview from '../../../../shared/interfaces/status-overview.interf
 export class ProjectListItemComponent implements OnInit {
 
   @Input() project: Project;
-  @Input() projectStatus: ProjectStatus;
-  @Input() dependencyStatuses;
-  @Input() statusOverview: StatusOverview;
+  @Input() projectStatus: ProjectsStatus;
 
   constructor() { }
 

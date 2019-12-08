@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Project from '../../../../shared/interfaces/project.interface';
 import { DomSanitizer } from '@angular/platform-browser';
-import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
-import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
+import ProjectsStatus from '../../interfaces/projects-status.interface';
 
 @Component({
   selector: 'app-project-details',
@@ -12,13 +11,12 @@ import StatusOverview from '../../../../shared/interfaces/status-overview.interf
 export class ProjectDetailsComponent implements OnInit {
 
   @Input() project: Project;
-  @Input() projectStatus: ProjectStatus;
-  @Input() statusOverview: StatusOverview;
-  @Input() dependencyStatuses;
+  @Input() projectStatus: ProjectsStatus;
 
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    console.log('projectDetails: projectStatus: ', this.projectStatus);
   }
 
 }

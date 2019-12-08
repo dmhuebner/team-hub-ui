@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
-import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
-import { ProjectStatusService } from '../../services/project-status.service';
+import ProjectsStatus from '../../interfaces/projects-status.interface';
 
 @Component({
   selector: 'app-project-status',
@@ -10,23 +8,12 @@ import { ProjectStatusService } from '../../services/project-status.service';
 })
 export class ProjectStatusComponent implements OnInit {
 
-  @Input() projectStatus: ProjectStatus;
-  @Input() dependencyStatuses: ProjectStatus;
-  @Input() statusOverview: StatusOverview;
+  @Input() projectStatus: ProjectsStatus;
   @Input() small: boolean;
 
-  constructor(public statusService: ProjectStatusService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  dependencyDown(): boolean {
-    if (this.dependencyStatuses) {
-      return Object.values(this.dependencyStatuses).some(depStatus => {
-        // @ts-ignore
-        return !depStatus.up;
-      });
-    }
   }
 
 }

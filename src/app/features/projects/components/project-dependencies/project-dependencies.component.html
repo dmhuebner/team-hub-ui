@@ -4,9 +4,7 @@
       <app-project-list-item
               [routerLink]="project.name"
               [project]="project"
-              [projectStatus]="getProjectStatusObj(project.name)"
-              [statusOverview]="statusOverview"
-              [dependencyStatuses]="getDependencyStatuses(project.name)">
+              [projectStatus]="projectsStatus?.dependencies[project.name]">
       </app-project-list-item>
     </div>
   </section>

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Project from '../../../../shared/interfaces/project.interface';
-import ProjectStatus from '../../../../shared/interfaces/project-status.interface';
-import StatusOverview from '../../../../shared/interfaces/status-overview.interface';
+import ProjectsStatus from '../../interfaces/projects-status.interface';
 
 @Component({
   selector: 'app-project-dependencies',
@@ -13,32 +12,9 @@ export class ProjectDependenciesComponent implements OnInit {
   constructor() { }
 
   @Input() dependencies: Project[];
-  @Input() statusOverview: StatusOverview;
+  @Input() projectsStatus: ProjectsStatus;
 
   ngOnInit() {
-  }
-
-  getProjectStatusObj(projectName: string): ProjectStatus {
-    const projectStatusObj = this.statusOverview.projectStatuses.find(status => status.name === projectName);
-    return projectStatusObj || {name: projectName, pathsChecked: [], up: null};
-  }
-
-  getDependencyStatuses(projectName: string, dependencyStatuses = {}) {
-    const project = this.dependencies.find(proj => proj.name === projectName);
-    if (project && project.dependencies && project.dependencies.length) {
-      project.dependencies.forEach(dep => {
-        if (dep.name) {
-          dependencyStatuses[dep.name] = this.getProjectStatusObj(dep.name);
-          if (dep.dependencies && dep.dependencies.length) {
-            this.getDependencyStatuses(dep.name, dependencyStatuses);
-          }
-        } else {
-          console.error('The dependency does not have a "name" property', dep);
-        }
-      });
-      // console.log('dependencyStatuses', dependencyStatuses);
-      return dependencyStatuses;
-    }
   }
 
 }

@@ -8,6 +8,23 @@ A configurable dev team board that gives visibility and tools into everything th
 npm install
 ```
 
+## Run in Docker
+
+##### Build:
+```
+docker build -t team-hub-ui:dev .
+```
+
+##### Run:
+```
+docker run --name team-hub-ui -p 4200:4200 team-hub-ui:dev
+```
+
+##### Run in detached mode:
+```
+docker run -d --name team-hub-ui -p 4200:4200 team-hub-ui:dev
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

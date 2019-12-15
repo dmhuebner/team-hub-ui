@@ -35,15 +35,30 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
       });
     }
 
-    this.statusService.projectsStatusMonitor$.pipe(
-        takeUntil(this.unsubscribe$)
-    ).subscribe(msgToClient => {
-      this.projectsStatusOverview = msgToClient;
-    });
+    this.subscribeToProjectsMonitor();
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next(true);
+  }
+
+  stopMonitoringProjects() {
+    this.statusService.stopMonitoring();
+    this.unsubscribe$.next(true);
+  }
+
+  startMonitoringProjects() {
+    this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
+    this.subscribeToProjectsMonitor();
+  }
+
+  private subscribeToProjectsMonitor() {
+    this.statusService.projectsStatusMonitor$.pipe(
+        takeUntil(this.unsubscribe$)
+    ).subscribe(msgToClient => {
+      console.log('Projects Statuses', msgToClient);
+      this.projectsStatusOverview = msgToClient;
+    });
   }
 
 }

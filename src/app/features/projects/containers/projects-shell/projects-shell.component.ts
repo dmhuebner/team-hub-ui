@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import Project from '../../../../shared/interfaces/project.interface';
+import Project from '../../interfaces/project.interface';
 import { ProjectConfigService } from '../../services/project-config.service';
 
 @Component({

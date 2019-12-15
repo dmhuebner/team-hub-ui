@@ -3,15 +3,23 @@
     <h1 class="project-name">{{project?.name}}</h1>
     <p><b>Description</b></p>
     <p>{{project?.description}}</p>
-    <p><b>Path Checked:</b></p>
-    <p>{{projectStatus?.status.path}}</p>
+    <p><b>Paths Checked:</b></p>
+    <ng-container *ngIf="projectStatus">
+      <span *ngFor="let status of projectStatus.statuses">
+      <p>{{status.path}}</p>
+    </span>
+    </ng-container>
+    <div>
+<!--      <iframe *ngIf="project.uiPath"-->
+<!--              height="400"-->
+<!--              width="700"-->
+<!--              [src]="sanitizer.bypassSecurityTrustResourceUrl(project.uiPath)">-->
+<!--      </iframe>-->
+    </div>
   </div>
   <div class="project-status">
     <app-project-status
             [projectStatus]="projectStatus">
     </app-project-status>
   </div>
-<!--  <iframe *ngIf="project.uiPath"-->
-<!--          [src]="sanitizer.bypassSecurityTrustResourceUrl(project.uiPath)">-->
-<!--  </iframe>-->
 </section>

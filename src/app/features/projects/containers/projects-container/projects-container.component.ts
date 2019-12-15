@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import Project from '../../../../shared/interfaces/project.interface';
+import Project from '../../interfaces/project.interface';
 import { ProjectStatusService } from '../../services/project-status.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

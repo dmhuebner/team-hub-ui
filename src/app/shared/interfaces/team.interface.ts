@@ -1,5 +1,5 @@
 import TeamMember from './team-member.interface';
-import Project from './project.interface';
+import Project from '../../features/projects/interfaces/project.interface';
 
 export default interface Team {
     name: string;

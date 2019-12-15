@@ -28,40 +28,46 @@
         "description": "Time keeping and task list app that uses the pomodoro technique",
         "appType": "UI",
         "uiPath": "https://pomodor.herokuapp.com/home",
-        "healthCheck": {
-          "path": "http://localhost:3001",
-          "successStatuses": [200],
-          "method": "GET",
-          "headers": {
-            "Authorization": "basic 5678765789asdsdfgdshf==",
-            "Content-Type": "application/json"
+        "healthChecks": [
+          {
+            "path": "http://localhost:3001",
+            "successStatuses": [200],
+            "method": "GET",
+            "headers": {
+              "Authorization": "basic 5678765789asdsdfgdshf==",
+              "Content-Type": "application/json"
+            }
           }
-        },
+        ],
         "dependencies": [
           {
             "name": "some-api",
             "description": "Some API that does important stuff",
             "appType": "API",
-            "healthCheck": {
-              "path": "https://api.github.com/users/octocat",
-              "successStatuses": [200],
-              "method": "GET"
-            },
+            "healthChecks": [
+              {
+                "path": "https://api.github.com/users/octocat",
+                "successStatuses": [200],
+                "method": "GET"
+              }
+            ],
             "dependencies": [
               {
                 "name": "another-api",
                 "description": "Another API that does other stuff",
                 "appType": "API",
-                "healthCheck": {
-                  "path": "http://localhost:3001WRONG",
-                  "successStatuses": [200],
-                  "method": "POST",
-                  "requestBody": "{foo: 'bar', stuff: true}",
-                  "headers": {
-                    "Authorization": "basic 5678765789asdsdfgdshf==",
-                    "Content-Type": "application/json"
+                "healthChecks": [
+                  {
+                    "path": "http://localhost:3001WRONG",
+                    "successStatuses": [200],
+                    "method": "POST",
+                    "requestBody": "{foo: 'bar', stuff: true}",
+                    "headers": {
+                      "Authorization": "basic 5678765789asdsdfgdshf==",
+                      "Content-Type": "application/json"
+                    }
                   }
-                },
+                ],
                 "dependencies": []
               }
             ]
@@ -70,11 +76,23 @@
             "name": "github-api",
             "description": "Github API that does other stuff",
             "appType": "API",
-            "healthCheck": {
-              "path": "https://api.github.com/users/octocat",
-              "successStatuses": [200],
-              "method": "GET"
-            },
+            "healthChecks": [
+              {
+                "path": "https://api.github.com/users/octocat",
+                "successStatuses": [200],
+                "method": "GET"
+              },
+              {
+                "path": "https://api.github.com/users/octocat",
+                "successStatuses": [200],
+                "method": "GET"
+              },
+              {
+                "path": "https://api.github.com/users/octocatt",
+                "successStatuses": [200],
+                "method": "GET"
+              }
+            ],
             "dependencies": []
           }
         ]
@@ -83,28 +101,39 @@
         "name": "Other Thing",
         "description": "Some other thing that uses the pomodoro technique",
         "uiPath": "https://other-thing.herokuapp.com/home",
-        "healthCheck": {
-          "path": "https://api.github.com/users/octocat",
-          "successStatuses": [
-            200
-          ],
-          "method": "GET"
-        },
+        "healthChecks": [
+          {
+            "path": "https://api.github.com/users/octocat",
+            "successStatuses": [
+              200
+            ],
+            "method": "GET"
+          }
+        ],
         "dependencies": []
       },
       {
         "name": "And Another Thing",
         "description": "Some other thing that uses the pomodoro technique",
         "uiPath": "https://other-thing.herokuapp.com/home",
-        "healthCheck": {
-          "path": "https://api.github.com/users/octocat",
-          "successStatuses": [
-            200
-          ],
-          "method": "GET"
-        },
+        "healthChecks": [
+          {
+            "path": "https://api.github.com/users/octocat",
+            "successStatuses": [
+              200
+            ],
+            "method": "GET"
+          },
+          {
+            "path": "https://api.github.com/users/octocat",
+            "successStatuses": [
+              200
+            ],
+            "method": "GET"
+          }
+        ],
         "dependencies": [
-          {"name":"mke syeigrf wlv","description":"ddud boxni rauwc mpko ysit xho qhdpcdhr aiyasej","uiPath":"https://ddfjjfilfmfrppxdublipwhds/mhd","healthCheck":{"path":"https://api.github.com/users/octocatt","successStatuses":[200], "method": "GET"},"dependencies":[]}
+          {"name":"mke syeigrf wlv","description":"ddud boxni rauwc mpko ysit xho qhdpcdhr aiyasej","uiPath":"https://ddfjjfilfmfrppxdublipwhds/mhd","healthChecks": [{"path":"https://api.github.com/users/octocatt","successStatuses":[200], "method": "GET"}], "dependencies":[]}
         ]
       }
     ]

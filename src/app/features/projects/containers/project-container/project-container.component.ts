@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import Project from '../../../../shared/interfaces/project.interface';
+import Project from '../../interfaces/project.interface';
 import { ProjectConfigService } from '../../services/project-config.service';
 import { Observable, Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';

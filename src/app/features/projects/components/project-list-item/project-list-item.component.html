@@ -21,15 +21,17 @@
   </div>
   <div class="right-panel">
     <div>
-      <div class="project-status">
+        <div class="project-status">
         <app-project-status
                 [projectStatus]="projectStatus"
                 small="true">
         </app-project-status>
-      </div>
-      <p><b>Path Checked:</b></p>
-      <p>{{projectStatus.status.path}}</p>
-        <p>Status: {{projectStatus.status.status}}</p>
+        </div>
+        <p><b>Paths Checked:</b></p>
+        <div *ngFor="let status of projectStatus.statuses">
+            <p><b>Path:</b> {{status.path}}</p>
+            <p><b>Status:</b> {{status.status}} <span *ngIf="!status.status">No response</span></p>
+        </div>
     </div>
   </div>
 </div>

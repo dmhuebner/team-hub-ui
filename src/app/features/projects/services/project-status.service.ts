@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { ConfigService } from '../../../shared/services/config.service';
-import Project from '../../../shared/interfaces/project.interface';
+import Project from '../interfaces/project.interface';
 import { WebsocketService } from './websocket.service';
 
 @Injectable({

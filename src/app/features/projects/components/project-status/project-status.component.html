@@ -1,12 +1,16 @@
 <div class="project-status-container" [class.small]="small" *ngIf="projectStatus">
-  <div *ngIf="projectStatus.status.up && !projectStatus.status.warning" class="project-status up">
+  <div *ngIf="projectStatus.up && !projectStatus.warning" class="project-status up">
     <mat-icon>offline_bolt</mat-icon>
   </div>
-  <div *ngIf="projectStatus.status.up && projectStatus.status.warning" class="project-status warning">
+  <div *ngIf="projectStatus.up && projectStatus.warning" class="project-status warning">
     <mat-icon>offline_bolt</mat-icon>
   </div>
-  <div *ngIf="!projectStatus.status.up" class="project-status">
+  <div *ngIf="!projectStatus.up" class="project-status">
     <mat-icon>close</mat-icon>
   </div>
 </div>
-<span *ngIf="projectStatus"> - {{projectStatus.status.status}}</span>
+<ng-container *ngIf="projectStatus">
+  <span *ngFor="let status of projectStatus.statuses">
+    <span *ngIf="status.status"> - {{status.status}}</span>
+  </span>
+</ng-container>

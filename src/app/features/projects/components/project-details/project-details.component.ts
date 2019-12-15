@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import Project from '../../../../shared/interfaces/project.interface';
+import Project from '../../interfaces/project.interface';
 import { DomSanitizer } from '@angular/platform-browser';
 import ProjectsStatus from '../../interfaces/projects-status.interface';
 

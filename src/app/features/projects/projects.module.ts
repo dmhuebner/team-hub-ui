@@ -11,6 +11,7 @@ import { ProjectDependenciesComponent } from './components/project-dependencies/
 import { ProjectStatusComponent } from './components/project-status/project-status.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MsToMinPipe } from './pipes/ms-to-min.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MatButtonModule } from '@angular/material/button';
       ProjectsShellComponent,
       ProjectDetailsComponent,
       ProjectDependenciesComponent,
-      ProjectStatusComponent
+      ProjectStatusComponent,
+      MsToMinPipe
   ],
     imports: [
         CommonModule,

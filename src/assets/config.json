@@ -30,7 +30,7 @@
         "uiPath": "https://pomodor.herokuapp.com/home",
         "healthChecks": [
           {
-            "path": "http://localhost:3001",
+            "path": "http://api.github.com/users/octocat",
             "successStatuses": [200],
             "method": "GET",
             "headers": {
@@ -58,7 +58,7 @@
                 "appType": "API",
                 "healthChecks": [
                   {
-                    "path": "http://localhost:3001WRONG",
+                    "path": "http://localhost:3001/post",
                     "successStatuses": [200],
                     "method": "POST",
                     "requestBody": "{foo: 'bar', stuff: true}",

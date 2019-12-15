@@ -6,7 +6,7 @@
     <p><b>Paths Checked:</b></p>
     <ng-container *ngIf="projectStatus">
       <span *ngFor="let status of projectStatus.statuses">
-      <p>{{status.path}}</p>
+      <p>{{status.path}} - status: <span>{{status.status}}</span><span *ngIf="!status.status">No response</span></p>
     </span>
     </ng-container>
     <div>

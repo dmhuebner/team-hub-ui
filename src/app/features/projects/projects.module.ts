@@ -33,7 +33,7 @@ import { MonitorInfoComponent } from './components/monitor-info/monitor-info.com
         HttpClientModule,
         ProjectsRoutingModule,
         MatIconModule,
-        MatButtonModule
+        MatButtonModule,
     ],
   exports: [
       ProjectsShellComponent

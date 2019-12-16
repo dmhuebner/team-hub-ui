@@ -19,7 +19,7 @@ export class WebsocketService {
 
     const monitorObservable = new Observable(observer => {
       this.socket.on('msgToClient:monitor', data => {
-        console.log('Received message from team-hub-api server');
+        console.debug('Received message from team-hub-api server');
         observer.next(data);
       });
       return () => {
@@ -29,7 +29,7 @@ export class WebsocketService {
 
     const monitorObserver = {
       next: (data: any) => {
-        console.log('msgToServer Sent: ', data);
+        console.debug('msgToServer Sent: ', data);
         this.socket.emit('msgToServer:monitor', JSON.stringify(data));
       }
     };
@@ -46,7 +46,7 @@ export class WebsocketService {
 
     const stopMonitorObserver = {
       next: (data: boolean) => {
-        console.log('msgToServer:stopMonitor Sent: ', data);
+        console.debug('msgToServer:stopMonitor Sent: ', data);
         this.socket.emit('msgToServer:stopMonitor', JSON.stringify(data));
       }
     };

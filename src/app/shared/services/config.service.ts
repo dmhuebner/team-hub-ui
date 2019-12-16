@@ -13,9 +13,7 @@ export class ConfigService {
   private currentConfigSubject: BehaviorSubject<ConfigWrapper> = new BehaviorSubject<Config>(TEAM_CONFIG);
   currentConfig$: Observable<Config> = this.currentConfigSubject.asObservable().pipe(map(config => config.default));
 
-  constructor() {
-    console.log(TEAM_CONFIG);
-  }
+  constructor() {}
 
   setConfig(config: Config) {
     // We pass default because the module automatically has a wrapper with default property

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Project from '../../interfaces/project.interface';
 import { ProjectConfigService } from '../../services/project-config.service';
 import { Observable, Subject } from 'rxjs';
@@ -20,8 +20,10 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
   intervalLength: number;
   projectsStatus: ProjectsStatus;
   unsubscribe$: Subject<boolean> = new Subject();
+  dependencyNavRef: string[] = [];
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private location: Location,
               private projectsConfigService: ProjectConfigService,
               public statusService: ProjectStatusService) { }
@@ -47,12 +49,20 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['projects']);
+  }
+
+  navigateToProject(projectName: string, index: number) {
+    console.log(projectName, index);
+    const navPaths = ['projects', ...this.dependencyNavRef].slice(0, index + 2);
+    console.log('navPaths', navPaths);
+    return this.router.navigate(navPaths);
   }
 
   private getProject(projects: Project[]) {
     const routeParams = this.route.snapshot.paramMap.keys;
     const dependencyList = routeParams.map(param => this.route.snapshot.paramMap.get(param));
+    this.dependencyNavRef = dependencyList.slice(0, dependencyList.length - 1);
     const rootProject = projects.find(proj => proj.name === this.route.snapshot.paramMap.get('dep'));
 
     if (rootProject) {

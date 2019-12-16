@@ -56,7 +56,7 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
     this.statusService.projectsStatusMonitor$.pipe(
         takeUntil(this.unsubscribe$)
     ).subscribe(msgToClient => {
-      console.log('Projects Statuses', msgToClient);
+      console.debug('Projects Statuses', msgToClient);
       this.projectsStatusOverview = msgToClient;
     });
   }

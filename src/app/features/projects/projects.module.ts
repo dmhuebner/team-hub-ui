@@ -12,6 +12,8 @@ import { ProjectStatusComponent } from './components/project-status/project-stat
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MsToMinPipe } from './pipes/ms-to-min.pipe';
+import { TimerPipe } from './pipes/timer.pipe';
+import { MonitorInfoComponent } from './components/monitor-info/monitor-info.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MsToMinPipe } from './pipes/ms-to-min.pipe';
       ProjectDetailsComponent,
       ProjectDependenciesComponent,
       ProjectStatusComponent,
-      MsToMinPipe
+      MsToMinPipe,
+      TimerPipe,
+      MonitorInfoComponent
   ],
     imports: [
         CommonModule,

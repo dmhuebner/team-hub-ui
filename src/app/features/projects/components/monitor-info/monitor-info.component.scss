@@ -1,0 +1,24 @@
+.monitor-info {
+  text-align: right;
+
+  .interval-length {
+    color: #3F51B5;
+  }
+
+  button.stop-monitor-btn {
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    padding: 0 0.4rem;
+  }
+
+  .projects-monitor-countdown {
+    display: inline-block;
+    margin-right: 0.7rem;
+    padding: 0.25rem;
+    border: 1px solid #999;
+    color: #777;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+  }
+}

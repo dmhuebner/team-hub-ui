@@ -1,20 +1,14 @@
 <header class="projects-header">
   <h1 class="heading">Projects</h1>
   <div class="monitor-info">
-    <div *ngIf="statusService.projectsMonitorOn">Monitoring projects every: {{intervalLength | msToMin}}</div>
-    <button *ngIf="statusService.projectsMonitorOn"
-            class="stop-monitor-btn"
-            (click)="stopMonitoringProjects()"
-            mat-raised-button>
-      Stop Monitoring
-    </button>
-    <button *ngIf="!statusService.projectsMonitorOn && projectsConfig && projectsConfig.length"
-            (click)="startMonitoringProjects()"
-            mat-raised-button
-            color="primary">
-      Monitor every {{intervalLength | msToMin}}
-    </button>
-    <span *ngIf="!projectsConfig || !projectsConfig.length">No Projects Config</span>
+    <app-monitor-info
+            [monitorOn]="statusService.projectsMonitorOn"
+            [monitorCountdown]="statusService.projectsMonitorCountdown$ | async"
+            [intervalLength]="intervalLength"
+            [hasConfig]="!!(projectsConfig && projectsConfig.length)"
+            (startedMonitoring)="startMonitoringProjects()"
+            (stoppedMonitoring)="stopMonitoringProjects()">
+    </app-monitor-info>
   </div>
 </header>
 <section class="projects-container">

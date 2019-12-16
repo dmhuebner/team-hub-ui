@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import Socket = SocketIOClient.Socket;
-import WebsocketMessages from '../interfaces/websocket-messages';
+import WebsocketMessages from '../interfaces/websocket-messages.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class WebsocketService {
     this.socket = io(environment.websocket_url);
 
     const monitorObservable = new Observable(observer => {
-      this.socket.on('msgToClient', data => {
+      this.socket.on('msgToClient:monitor', data => {
         console.log('Received message from team-hub-api server');
         observer.next(data);
       });
@@ -30,7 +30,7 @@ export class WebsocketService {
     const monitorObserver = {
       next: (data: any) => {
         console.log('msgToServer Sent: ', data);
-        this.socket.emit('msgToServer', JSON.stringify(data));
+        this.socket.emit('msgToServer:monitor', JSON.stringify(data));
       }
     };
 
@@ -51,9 +51,23 @@ export class WebsocketService {
       }
     };
 
+    const monitorCountdownObservable = new Observable(observer => {
+      this.socket.on('msgToClient:monitorCountdown', (data: number) => {
+        observer.next(data);
+      });
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+
+    const monitorCountdownObserver = {
+      next: data => {}
+    };
+
     return {
       projectsMonitorSubject: Subject.create(monitorObserver, monitorObservable),
       stopProjectsMonitorSubject: Subject.create(stopMonitorObserver, stopMonitorObservable),
+      projectsMonitorCountdown$: Subject.create(monitorCountdownObserver, monitorCountdownObservable).asObservable(),
     };
   }
 }

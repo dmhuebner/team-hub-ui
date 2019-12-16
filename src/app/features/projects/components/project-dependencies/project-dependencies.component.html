@@ -1,5 +1,8 @@
 <section class="dependencies-container">
-  <h3 class="dependencies-header" *ngIf="dependencies">Dependencies</h3>
+  <h3 class="dependencies-header"
+      *ngIf="dependencies && dependencies.length">
+    Dependencies
+  </h3>
   <section class="dependencies-list">
     <div class="project" *ngFor="let project of dependencies">
       <app-project-list-item

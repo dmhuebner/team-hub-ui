@@ -14,6 +14,8 @@ export class ProjectStatusService {
     private projectsMonitorSocketSubject: Subject<any>;
     projectsStatusMonitor$: Observable<any>;
 
+    projectsMonitorCountdown$: Observable<any>;
+
     private stopProjectsMonitorSubject: Subject<any>;
     stopProjectsMonitor$: Observable<any>;
     projectsMonitorOn = false;
@@ -21,13 +23,15 @@ export class ProjectStatusService {
     constructor(private http: HttpClient,
                 private configService: ConfigService,
                 private wsService: WebsocketService) {
-        const {projectsMonitorSubject, stopProjectsMonitorSubject} = wsService.connect();
+        const {projectsMonitorSubject, stopProjectsMonitorSubject, projectsMonitorCountdown$} = wsService.connect();
 
         this.projectsMonitorSocketSubject = projectsMonitorSubject;
         this.projectsStatusMonitor$ = this.projectsMonitorSocketSubject.asObservable().pipe(shareReplay(1));
 
         this.stopProjectsMonitorSubject = stopProjectsMonitorSubject;
         this.stopProjectsMonitor$ = this.stopProjectsMonitorSubject.asObservable().pipe(shareReplay(1));
+
+        this.projectsMonitorCountdown$ = projectsMonitorCountdown$.pipe(shareReplay(1));
     }
 
     startMonitoring(projects: Project[], intervalLength) {

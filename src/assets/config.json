@@ -59,7 +59,7 @@
                 "healthChecks": [
                   {
                     "path": "http://localhost:3001/post",
-                    "successStatuses": [200],
+                    "successStatuses": [200, 400],
                     "method": "POST",
                     "requestBody": "{foo: 'bar', stuff: true}",
                     "headers": {

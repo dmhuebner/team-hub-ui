@@ -30,6 +30,7 @@
         "uiPath": "https://pomodor.herokuapp.com/home",
         "healthChecks": [
           {
+            "name": "pom dep check",
             "path": "http://api.github.com/users/octocat",
             "successStatuses": [200],
             "method": "GET",
@@ -46,6 +47,7 @@
             "appType": "API",
             "healthChecks": [
               {
+                "name": "some-api check",
                 "path": "https://api.github.com/users/octocat",
                 "successStatuses": [200],
                 "method": "GET"
@@ -58,6 +60,7 @@
                 "appType": "API",
                 "healthChecks": [
                   {
+                    "name": "another-api check",
                     "path": "http://localhost:3001/post",
                     "successStatuses": [200, 400],
                     "method": "POST",
@@ -76,6 +79,7 @@
                 "appType": "API",
                 "healthChecks": [
                   {
+                    "name": "another-api2 check",
                     "path": "https://api.github.com/users/octocat",
                     "successStatuses": [200, 403],
                     "method": "POST",
@@ -96,16 +100,19 @@
             "appType": "API",
             "healthChecks": [
               {
+                "name": "github api check 1",
                 "path": "https://api.github.com/users/octocat",
                 "successStatuses": [200],
                 "method": "GET"
               },
               {
+                "name": "github api check 2",
                 "path": "https://api.github.com/users/octocat",
                 "successStatuses": [200],
                 "method": "GET"
               },
               {
+                "name": "github api check 3",
                 "path": "https://api.github.com/users/octocatt",
                 "successStatuses": [200],
                 "method": "GET"
@@ -121,6 +128,7 @@
         "uiPath": "https://other-thing.herokuapp.com/home",
         "healthChecks": [
           {
+            "name": "other thing check",
             "path": "https://api.github.com/users/octocat",
             "successStatuses": [
               200

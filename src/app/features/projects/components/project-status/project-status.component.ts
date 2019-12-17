@@ -9,7 +9,7 @@ import ProjectsStatus from '../../interfaces/projects-status.interface';
 export class ProjectStatusComponent implements OnInit {
 
   @Input() projectStatus: ProjectsStatus;
-  @Input() small: boolean;
+  @Input() size: 'small' | 'medium' | 'large';
 
   constructor() { }
 

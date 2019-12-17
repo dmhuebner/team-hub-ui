@@ -26,7 +26,19 @@
 
 .project-status-container.small {
   .project-status {
-    padding: 0.3rem 0.3rem;
+    padding: 0.3rem;
+    text-align: center;
+    width: 1.5rem;
+
+    mat-icon {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.project-status-container.medium {
+  .project-status {
+    padding: 1.5rem;
     text-align: center;
     width: 1.5rem;
 

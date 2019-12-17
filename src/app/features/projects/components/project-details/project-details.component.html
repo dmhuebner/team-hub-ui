@@ -5,29 +5,8 @@
     <p>{{project?.description}}</p>
     <p><b>Health Checks:</b></p>
     <hr>
-    <ng-container *ngIf="projectStatus">
-      <div *ngFor="let status of projectStatus.statuses">
-        <p class="healthcheck-name" [class.up]="status.up">
-          <b>{{status.healthCheckName}}</b>
-          <span class="up-down-text" *ngIf="status.up; else statusDown">
-            <mat-icon>arrow_upward</mat-icon>
-          </span>
-          <ng-template #statusDown>
-            <span class="up-down-text"><mat-icon>arrow_downward</mat-icon></span>
-          </ng-template>
-        </p>
-        <div class="healthcheck-status-wrapper"
-             [class.up]="status.up">
-          <p>
-            status:
-            <span class="status-code" [class.up]="status.up"> <b>{{status.status}}</b></span>
-            <span *ngIf="!status.status">No response</span>
-          </p>
-          <p>path: <b>{{status.path}}</b></p>
-          <p>successStatuses: [ {{status.successStatuses.join(', ')}} ]</p>
-        </div>
-      </div>
-    </ng-container>
+    <app-healthcheck-status-list-item [projectStatus]="projectStatus">
+    </app-healthcheck-status-list-item>
     <div>
 <!--      <iframe *ngIf="project.uiPath"-->
 <!--              height="400"-->

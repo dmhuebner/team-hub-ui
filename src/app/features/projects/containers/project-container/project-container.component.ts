@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ProjectStatusService } from '../../services/project-status.service';
 import { Location } from '@angular/common';
-import ProjectsStatus from '../../interfaces/projects-status.interface';
+import ProjectStatus from '../../interfaces/project-status.interface';
 
 @Component({
   selector: 'app-project-container',
@@ -18,7 +18,7 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
   project: Project;
   projectsConfig: Project[];
   intervalLength: number;
-  projectsStatus: ProjectsStatus;
+  projectsStatus: ProjectStatus;
   unsubscribe$ = new Subject<boolean>();
   dependencyNavRef: string[] = [];
 
@@ -73,7 +73,7 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getProjectStatus(): Observable<ProjectsStatus> {
+  private getProjectStatus(): Observable<ProjectStatus> {
     return this.statusService.projectsStatusMonitor$.pipe(
         map(statusOverview => {
           const routeParams = this.route.snapshot.paramMap.keys;

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import ProjectsStatus from '../../interfaces/projects-status.interface';
+import ProjectStatus from '../../interfaces/project-status.interface';
 
 @Component({
   selector: 'app-project-status',
@@ -8,7 +8,7 @@ import ProjectsStatus from '../../interfaces/projects-status.interface';
 })
 export class ProjectStatusComponent implements OnInit {
 
-  @Input() projectStatus: ProjectsStatus;
+  @Input() projectStatus: ProjectStatus;
   @Input() size: 'small' | 'medium' | 'large';
 
   constructor() { }

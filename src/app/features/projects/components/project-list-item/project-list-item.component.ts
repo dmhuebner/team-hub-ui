@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Project from '../../interfaces/project.interface';
-import ProjectsStatus from '../../interfaces/projects-status.interface';
+import ProjectStatus from '../../interfaces/project-status.interface';
 
 @Component({
   selector: 'app-project-list-item',
@@ -10,7 +10,7 @@ import ProjectsStatus from '../../interfaces/projects-status.interface';
 export class ProjectListItemComponent implements OnInit {
 
   @Input() project: Project;
-  @Input() projectStatus: ProjectsStatus;
+  @Input() projectStatus: ProjectStatus;
 
   constructor() { }
 

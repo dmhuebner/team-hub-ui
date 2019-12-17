@@ -1,0 +1,26 @@
+.healthcheck-name {
+  color: #FF0000;
+
+  .up-down-text {
+    mat-icon {
+      margin-left: 0.7rem;
+    }
+  }
+
+  &.up {
+    color: green;
+  }
+}
+
+.healthcheck-status-wrapper {
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+
+  .status-code {
+    color: #FF0000;
+
+    &.up {
+      color: green;
+    }
+  }
+}

@@ -7,4 +7,6 @@ export default interface HealthCheckStatus {
     up: boolean;
     projectName: string;
     warning: boolean;
+    healthCheckName?: string;
+    successStatuses: number[];
 }

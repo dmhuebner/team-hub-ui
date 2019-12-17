@@ -1,4 +1,7 @@
-<div class="project-status-container" [class.small]="small" *ngIf="projectStatus">
+<div class="project-status-container"
+     [class.small]="size === 'small'"
+     [class.medium]="size === 'medium'"
+     *ngIf="projectStatus">
   <div *ngIf="projectStatus.up && !projectStatus.warning" class="project-status up">
     <mat-icon>offline_bolt</mat-icon>
   </div>

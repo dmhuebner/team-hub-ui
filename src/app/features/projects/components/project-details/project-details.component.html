@@ -3,12 +3,10 @@
     <h1 class="project-name">{{project?.name}}</h1>
     <p><b>Description</b></p>
     <p>{{project?.description}}</p>
-    <p><b>Paths Checked:</b></p>
-    <ng-container *ngIf="projectStatus">
-      <span *ngFor="let status of projectStatus.statuses">
-      <p>{{status.path}} - status: <span>{{status.status}}</span><span *ngIf="!status.status">No response</span></p>
-    </span>
-    </ng-container>
+    <p><b>Health Checks:</b></p>
+    <hr>
+    <app-healthcheck-status-list-item [projectStatus]="projectStatus">
+    </app-healthcheck-status-list-item>
     <div>
 <!--      <iframe *ngIf="project.uiPath"-->
 <!--              height="400"-->

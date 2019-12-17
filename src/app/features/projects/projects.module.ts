@@ -15,6 +15,7 @@ import { MsToMinPipe } from './pipes/ms-to-min.pipe';
 import { TimerPipe } from './pipes/timer.pipe';
 import { MonitorInfoComponent } from './components/monitor-info/monitor-info.component';
 import { DependencyNavComponent } from './components/dependency-nav/dependency-nav.component';
+import { HealthcheckStatusListItemComponent } from './components/healthcheck-status-list-item/healthcheck-status-list-item.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DependencyNavComponent } from './components/dependency-nav/dependency-n
       MsToMinPipe,
       TimerPipe,
       MonitorInfoComponent,
-      DependencyNavComponent
+      DependencyNavComponent,
+      HealthcheckStatusListItemComponent
   ],
     imports: [
         CommonModule,

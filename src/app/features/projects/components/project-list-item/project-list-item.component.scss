@@ -5,9 +5,13 @@
   justify-content: space-between;
   cursor: pointer;
   background: #fff;
+  -moz-transition: all .15s ease-in;
+  -o-transition: all .15s ease-in;
+  -webkit-transition: all .15s ease-in;
+  transition: all .15s ease-in-out;
 
-  :hover {
-    //background-color: #cccccc;
+  &:hover {
+    box-shadow: 2px 2px 5px 1px #cdcdcd;
   }
 
   .right-panel {

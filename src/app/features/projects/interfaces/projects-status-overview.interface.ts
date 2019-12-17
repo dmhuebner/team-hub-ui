@@ -1,5 +1,5 @@
-import ProjectsStatus from './projects-status.interface';
+import ProjectStatus from './project-status.interface';
 
 export default interface ProjectsStatusOverview {
-    [key: string]: ProjectsStatus;
+    [key: string]: ProjectStatus;
 }

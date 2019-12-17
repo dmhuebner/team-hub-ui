@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Project from '../../interfaces/project.interface';
-import ProjectsStatus from '../../interfaces/projects-status.interface';
+import ProjectStatus from '../../interfaces/project-status.interface';
 
 @Component({
   selector: 'app-project-dependencies',
@@ -12,7 +12,7 @@ export class ProjectDependenciesComponent implements OnInit {
   constructor() { }
 
   @Input() dependencies: Project[];
-  @Input() projectsStatus: ProjectsStatus;
+  @Input() projectsStatus: ProjectStatus;
 
   ngOnInit() {
   }

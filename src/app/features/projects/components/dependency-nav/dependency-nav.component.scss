@@ -1,0 +1,56 @@
+.dep-nav-container {
+  display: flex;
+
+  .back-btn {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+    display: flex;
+    cursor: pointer;
+
+    border: 1px solid #FAFAFA;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+
+    -moz-transition: all .20s ease-in;
+    -o-transition: all .20s ease-in;
+    -webkit-transition: all .20s ease-in;
+    transition: all .20s ease-in-out;
+
+    &:hover {
+      border-color: #9ed8b0;
+      color: #00b55d;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+    }
+
+    mat-icon {
+      margin-right: 0.2rem;
+    }
+
+    .btn-text {
+      margin-right: 0.7rem;
+      margin-top: 0.2rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  .dependency-nav {
+    margin: 3rem 0;
+    cursor: pointer;
+    color: #3F51B5;
+    font-size: 1.1rem;
+
+    &:hover {
+      color: #00b55d;
+    }
+  }
+
+  .current-project {
+    font-size: 1.1rem;
+  }
+
+}

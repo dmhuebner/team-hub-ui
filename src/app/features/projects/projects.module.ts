@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MsToMinPipe } from './pipes/ms-to-min.pipe';
 import { TimerPipe } from './pipes/timer.pipe';
 import { MonitorInfoComponent } from './components/monitor-info/monitor-info.component';
+import { DependencyNavComponent } from './components/dependency-nav/dependency-nav.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MonitorInfoComponent } from './components/monitor-info/monitor-info.com
       ProjectStatusComponent,
       MsToMinPipe,
       TimerPipe,
-      MonitorInfoComponent
+      MonitorInfoComponent,
+      DependencyNavComponent
   ],
     imports: [
         CommonModule,

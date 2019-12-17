@@ -1,0 +1,14 @@
+<div class="dep-nav-container">
+  <span class="back-btn"
+        (click)="navigateBack()">
+    <mat-icon>arrow_back</mat-icon><span class="btn-text"> Projects</span>
+  </span>
+  <span *ngIf="dependencyNavRef && dependencyNavRef.length">
+  <span *ngFor="let dep of dependencyNavRef; let i = index"
+        class="dependency-nav"
+        (click)="navigateToProject(dep, i)">
+    {{dep | lowercase}} /
+  </span>
+  <span class="current-project">{{currentProjectName}}</span>
+</span>
+</div>

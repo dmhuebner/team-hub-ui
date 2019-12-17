@@ -19,7 +19,7 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
   projectsConfig: Project[];
   intervalLength: number;
   projectsStatus: ProjectsStatus;
-  unsubscribe$: Subject<boolean> = new Subject();
+  unsubscribe$ = new Subject<boolean>();
   dependencyNavRef: string[] = [];
 
   constructor(private route: ActivatedRoute,
@@ -52,10 +52,7 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
     this.router.navigate(['projects']);
   }
 
-  navigateToProject(projectName: string, index: number) {
-    console.log(projectName, index);
-    const navPaths = ['projects', ...this.dependencyNavRef].slice(0, index + 2);
-    console.log('navPaths', navPaths);
+  navigateToProject(navPaths) {
     return this.router.navigate(navPaths);
   }
 

@@ -1,18 +1,9 @@
-<!--TODO make into component-->
-<span *ngIf="dependencyNavRef && dependencyNavRef.length">
-  <span *ngFor="let dep of dependencyNavRef; let i = index"
-        class="dependency-nav"
-        (click)="navigateToProject(dep, i)">
-    {{dep}} /
-  </span>
-  <span class="current-project">{{project.name}}</span>
-</span>
-<button mat-button
-        *ngIf="!dependencyNavRef || !dependencyNavRef.length"
-        (click)="goBack()">
-  <mat-icon>arrow_back</mat-icon> Projects
-</button>
-
+<app-dependency-nav
+        [currentProjectName]="project.name"
+        [dependencyNavRef]="dependencyNavRef"
+        (navigatedToProject)="navigateToProject($event)"
+        (navigatedBack)="goBack()">
+</app-dependency-nav>
 <section class="project-container">
   <app-project-details
           [project]="project"

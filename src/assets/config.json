@@ -90,7 +90,27 @@
                     }
                   }
                 ],
-                "dependencies": []
+                "dependencies": [
+                  {
+                    "name": "another-api3",
+                    "description": "Another API that does other stuff",
+                    "appType": "API",
+                    "healthChecks": [
+                      {
+                        "name": "another-api3 check",
+                        "path": "https://api.github.com/users/octocat",
+                        "successStatuses": [200, 403],
+                        "method": "POST",
+                        "requestBody": "{foo: 'bar', stuff: true}",
+                        "headers": {
+                          "Authorization": "basic 5678765789asdsdfgdshf==",
+                          "Content-Type": "application/json"
+                        }
+                      }
+                    ],
+                    "dependencies": []
+                  }
+                ]
               }
             ]
           },

@@ -1,0 +1,11 @@
+<div class="dep-diagram">
+    <span *ngFor="let project of dependencyDiagram; let i = index">
+      <div>{{project.name}}<span *ngIf="project.deps && project.deps.length">:</span></div>
+      <span *ngIf="project.deps && project.deps.length">
+        <app-dependency-visualization
+                [projectConfig]="projectConfig.dependencies[i]"
+                [dependencyDiagram]="project.deps">
+        </app-dependency-visualization>
+      </span>
+    </span>
+</div>

@@ -1,0 +1,10 @@
+<div class="dep-diagram-container">
+  <h4 class="dep-map-header">Dependencies Map</h4>
+  <div class="diagram">
+    <div class="project-name">{{projectConfig.name}}:</div>
+    <app-dependency-visualization
+            [projectConfig]="projectConfig"
+            [dependencyDiagram]="dependencyDiagram">
+    </app-dependency-visualization>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+@import "src/styles";
+
+.dep-diagram-container {
+  .diagram {
+    background: #555;
+    color: #FAFAFA;
+    padding: 2rem;
+    @include border-radius(10px);
+  }
+
+  .project-dependency-list {
+    padding-left: 2rem;
+  }
+
+}

@@ -1,26 +1,35 @@
-.healthcheck-name {
-  color: #FF0000;
+@import "src/styles";
 
-  .up-down-text {
-    mat-icon {
-      margin-left: 0.7rem;
-    }
-  }
+.healthcheck-item-container {
+  border: 1px solid #ccc;
+  @include border-radius(5px);
+  padding: 0 1rem;
 
-  &.up {
-    color: green;
-  }
-}
-
-.healthcheck-status-wrapper {
-  margin-left: 1rem;
-  margin-bottom: 2rem;
-
-  .status-code {
+  .healthcheck-name {
     color: #FF0000;
+
+    .up-down-text {
+      mat-icon {
+        margin-left: 0.7rem;
+      }
+    }
 
     &.up {
       color: green;
     }
   }
+
+  .healthcheck-status-wrapper {
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+
+    .status-code {
+      color: #FF0000;
+
+      &.up {
+        color: green;
+      }
+    }
+  }
+
 }

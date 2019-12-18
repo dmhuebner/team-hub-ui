@@ -1,5 +1,5 @@
 <ng-container *ngIf="projectStatus">
-  <div *ngFor="let status of projectStatus.statuses">
+  <div class="healthcheck-item-container" *ngFor="let status of projectStatus.statuses">
     <p class="healthcheck-name" [class.up]="status.up">
       <b>{{status.healthCheckName}}</b>
       <span class="up-down-text" *ngIf="status.up; else statusDown">

@@ -10,7 +10,7 @@
     <ng-container *ngIf="project.dependencies && project.dependencies.length">
       <div *ngFor="let dep of project.dependencies">
         <span>{{dep.name}}</span>
-        <span> -
+        <span class="project-status-container">
           <app-project-status
                   [projectStatus]="projectStatus.dependencies[dep.name]"
                   size="small">

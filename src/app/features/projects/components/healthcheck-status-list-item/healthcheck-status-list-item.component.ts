@@ -9,10 +9,15 @@ import ProjectStatus from '../../interfaces/project-status.interface';
 export class HealthcheckStatusListItemComponent implements OnInit {
 
   @Input() projectStatus: ProjectStatus;
+  viewResponseBody = {};
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toggleRespBodyView(index: number) {
+    this.viewResponseBody[index] = !this.viewResponseBody[index];
   }
 
 }

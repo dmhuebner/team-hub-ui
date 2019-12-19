@@ -64,4 +64,28 @@ $xsBreakpoint: 467px;
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  .cdk-overlay-container {
+    snack-bar-container {
+      color: #fafafa;
+      font-size: 1.2rem;
+      font-weight: bold;
+
+      &.snackbar-status-update {
+        background-color: #2d5fed;
+      }
+
+      &.snackbar-status-update-up {
+        background-color: green;
+      }
+
+      &.snackbar-status-update-warning {
+        background-color: orange;
+      }
+
+      &.snackbar-status-update-down {
+        background-color: red;
+      }
+    }
+  }
 }

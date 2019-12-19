@@ -29,7 +29,7 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
       ).subscribe((config) => {
         this.projectsConfig = config.projects;
         this.intervalLength = config.intervalLength;
-        if (!this.statusService.projectsMonitorOn) {
+        if (!this.statusService.projectsMonitorOn && !this.statusService.userTurnedOffProjectMonitor) {
           this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
         }
       });

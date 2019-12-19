@@ -15,7 +15,7 @@
           (click)="startMonitoringProjects()"
           mat-raised-button
           color="primary">
-    Monitor every {{intervalLength | msToMin}}
+    Start monitoring every {{intervalLength | msToMin}}
   </button>
   <span *ngIf="!hasConfig">No Projects Config</span>
 </div>

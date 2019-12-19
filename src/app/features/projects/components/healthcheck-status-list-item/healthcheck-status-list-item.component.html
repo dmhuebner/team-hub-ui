@@ -16,8 +16,9 @@
         <span class="status-code" [class.up]="status.up"> <b>{{status.status}}</b></span>
         <span *ngIf="!status.status">No response</span>
       </p>
-      <p>path: <b>{{status.path}}</b></p>
-      <p>successStatuses: [ {{status.successStatuses.join(', ')}} ]</p>
+      <span>{{status.method}}</span> - <b>{{status.path}}</b>
+      <p>timestamp: <b class="timestamp">{{status.timestamp | date: 'medium'}}</b></p>
+      <p>success statuses: [ {{status.successStatuses.join(', ')}} ]</p>
     </div>
   </div>
 </ng-container>

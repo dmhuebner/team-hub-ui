@@ -1,5 +1,5 @@
 <ng-container *ngIf="projectStatus">
-  <div class="healthcheck-item-container" *ngFor="let status of projectStatus.statuses">
+  <div class="healthcheck-item-container" *ngFor="let status of projectStatus.statuses; let i = index">
     <p class="healthcheck-name" [class.up]="status.up">
       <b>{{status.healthCheckName}}</b>
       <span class="up-down-text" *ngIf="status.up; else statusDown">
@@ -19,6 +19,9 @@
       <span>{{status.method}}</span> - <b>{{status.path}}</b>
       <p>timestamp: <b class="timestamp">{{status.timestamp | date: 'medium'}}</b></p>
       <p>success statuses: [ {{status.successStatuses.join(', ')}} ]</p>
+      <span *ngIf="status.responseBody">response body</span> -
+      <button (click)="toggleRespBodyView(i)" mat-flat-button>{{viewResponseBody[i] ? 'hide' : 'view'}}</button>
+      <pre *ngIf="viewResponseBody[i]">{{status.responseBody | json}}</pre>
     </div>
   </div>
 </ng-container>

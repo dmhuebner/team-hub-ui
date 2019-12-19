@@ -4,6 +4,7 @@
   border: 1px solid #ccc;
   @include border-radius(10px);
   padding: 0 1rem;
+  overflow: scroll;
 
   .healthcheck-name {
     color: #FF0000;

@@ -1,23 +1,33 @@
 <section class="project-details-container">
-  <div class="project-info">
-    <h1 class="project-name">{{project?.name}}</h1>
-    <p><b>Description</b></p>
-    <p>{{project?.description}}</p>
-    <p><b>Health Checks:</b></p>
-    <hr>
-    <app-healthcheck-status-list-item [projectStatus]="projectStatus">
-    </app-healthcheck-status-list-item>
-    <div>
-<!--      <iframe *ngIf="project.uiPath"-->
-<!--              height="400"-->
-<!--              width="700"-->
-<!--              [src]="sanitizer.bypassSecurityTrustResourceUrl(project.uiPath)">-->
-<!--      </iframe>-->
+  <h1 class="project-name">{{project?.name}}</h1>
+  <div class="project-details-inner-wrapper">
+    <div class="project-status-container" *ngIf="projectStatus">
+      <app-project-status
+              [projectStatus]="projectStatus">
+      </app-project-status>
+      <div class="project-status">
+        <!--      <hr>-->
+        <p class="health-check-list-label"><b>Health Checks</b></p>
+        <app-healthcheck-status-list-item [projectStatus]="projectStatus">
+        </app-healthcheck-status-list-item>
+      </div>
     </div>
-  </div>
-  <div class="project-status">
-    <app-project-status
-            [projectStatus]="projectStatus">
-    </app-project-status>
+    <div class="project-info">
+      <p><b>Project Description</b></p>
+      <p class="project-description">{{project?.description}}</p>
+      <div class="dep-map-container" *ngIf="projectStatus && project.dependencies && project.dependencies.length">
+        <app-dependency-vis-container
+                [projectConfig]="project"
+                [projectStatus]="projectStatus">
+        </app-dependency-vis-container>
+      </div>
+      <div>
+        <!--      <iframe *ngIf="project.uiPath"-->
+        <!--              height="400"-->
+        <!--              width="700"-->
+        <!--              [src]="sanitizer.bypassSecurityTrustResourceUrl(project.uiPath)">-->
+        <!--      </iframe>-->
+      </div>
+    </div>
   </div>
 </section>

@@ -14,6 +14,12 @@
     box-shadow: 2px 2px 5px 1px #cdcdcd;
   }
 
+  .project-status-container {
+    app-project-status {
+      display: inline-block;
+    }
+  }
+
   .right-panel {
     min-width: 20rem;
     

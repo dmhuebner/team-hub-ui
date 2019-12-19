@@ -1,15 +1,43 @@
-.project-details-container {
-  display: flex;
-  justify-content: space-between;
+@import "src/styles";
 
-  .project-info {
-    .project-name {
-      font-size: 2rem;
-    }
+.project-details-container {
+  border: 1px solid #eee;
+  @include border-radius(10px);
+  padding: 0 2rem 2rem 2rem;
+  margin-top: 1rem;
+
+  .project-name {
+    margin-top: 2rem;
+    font-size: 2rem;
   }
 
-  .project-status {
+  .project-details-inner-wrapper {
+    display: flex;
+    justify-content: space-between;
 
+    .project-info {
+      width: 45%;
+
+      .project-description {
+        margin-left: 1rem;
+      }
+
+      .dep-map-container {
+        margin-top: 2.5rem;
+      }
+    }
+
+    .project-status-container {
+      width: 45%;
+
+      .project-status {
+        width: auto;
+
+        .health-check-list-label {
+          margin-top: 3rem;
+        }
+      }
+    }
   }
 
 }

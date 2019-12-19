@@ -16,6 +16,8 @@ import { TimerPipe } from './pipes/timer.pipe';
 import { MonitorInfoComponent } from './components/monitor-info/monitor-info.component';
 import { DependencyNavComponent } from './components/dependency-nav/dependency-nav.component';
 import { HealthcheckStatusListItemComponent } from './components/healthcheck-status-list-item/healthcheck-status-list-item.component';
+import { DependencyVisualizationComponent } from './components/dependency-visualization/dependency-visualization.component';
+import { DependencyVisContainerComponent } from './containers/dependency-vis-container/dependency-vis-container.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { HealthcheckStatusListItemComponent } from './components/healthcheck-sta
       TimerPipe,
       MonitorInfoComponent,
       DependencyNavComponent,
-      HealthcheckStatusListItemComponent
+      HealthcheckStatusListItemComponent,
+      DependencyVisualizationComponent,
+      DependencyVisContainerComponent
   ],
     imports: [
         CommonModule,

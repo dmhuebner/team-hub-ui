@@ -90,7 +90,27 @@
                     }
                   }
                 ],
-                "dependencies": []
+                "dependencies": [
+                  {
+                    "name": "another-api3",
+                    "description": "Another API that does other stuff",
+                    "appType": "API",
+                    "healthChecks": [
+                      {
+                        "name": "another-api3 check",
+                        "path": "https://api.github.com/users/octocat",
+                        "successStatuses": [200, 403],
+                        "method": "POST",
+                        "requestBody": "{foo: 'bar', stuff: true}",
+                        "headers": {
+                          "Authorization": "basic 5678765789asdsdfgdshf==",
+                          "Content-Type": "application/json"
+                        }
+                      }
+                    ],
+                    "dependencies": []
+                  }
+                ]
               }
             ]
           },
@@ -113,7 +133,7 @@
               },
               {
                 "name": "github api check 3",
-                "path": "https://api.github.com/users/octocatt",
+                "path": "https://api.github.com/users/octocat",
                 "successStatuses": [200],
                 "method": "GET"
               }
@@ -136,7 +156,40 @@
             "method": "GET"
           }
         ],
-        "dependencies": []
+        "dependencies": [
+          {
+            "name": "Other Thing 2",
+            "description": "Some other thing that uses the pomodoro technique",
+            "uiPath": "https://other-thing.herokuapp.com/home",
+            "healthChecks": [
+              {
+                "name": "other thing2 check",
+                "path": "https://api.github.com/users/octocat",
+                "successStatuses": [
+                  200
+                ],
+                "method": "GET"
+              }
+            ],
+            "dependencies": []
+          },
+          {
+            "name": "Other Thing 3",
+            "description": "Some other thing that uses the pomodoro technique",
+            "uiPath": "https://other-thing.herokuapp.com/home",
+            "healthChecks": [
+              {
+                "name": "other thing3 check",
+                "path": "https://api.github.com/users/octocatt",
+                "successStatuses": [
+                  200
+                ],
+                "method": "GET"
+              }
+            ],
+            "dependencies": []
+          }
+        ]
       },
       {
         "name": "And Another Thing",

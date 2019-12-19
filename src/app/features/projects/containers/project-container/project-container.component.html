@@ -1,16 +1,18 @@
-<app-dependency-nav
-        [currentProjectName]="project.name"
-        [dependencyNavRef]="dependencyNavRef"
-        (navigatedToProject)="navigateToProject($event)"
-        (navigatedBack)="goBack()">
-</app-dependency-nav>
-<section class="project-container">
-  <app-project-details
-          [project]="project"
-          [projectStatus]="projectsStatus">
-  </app-project-details>
-  <app-project-dependencies
-          [dependencies]="project.dependencies"
-          [projectsStatus]="projectsStatus">
-  </app-project-dependencies>
-</section>
+<ng-container *ngIf="project">
+  <app-dependency-nav
+          [currentProjectName]="project.name"
+          [dependencyNavRef]="dependencyNavRef"
+          (navigatedToProject)="navigateToProject($event)"
+          (navigatedBack)="goBack()">
+  </app-dependency-nav>
+  <section class="project-container">
+    <app-project-details
+            [project]="project"
+            [projectStatus]="projectsStatus">
+    </app-project-details>
+    <app-project-dependencies
+            [dependencies]="project.dependencies"
+            [projectsStatus]="projectsStatus">
+    </app-project-dependencies>
+  </section>
+</ng-container>

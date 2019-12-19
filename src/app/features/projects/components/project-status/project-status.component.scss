@@ -1,49 +1,57 @@
-.project-status-container {
-  margin: 1rem;
-  color: #fff;
-  display: inline-block;
+.project-status-outer-wrapper {
+  display: flex;
 
-  .project-status {
-    background: red;
-    padding: 3rem;
-    border-radius: 50% 50%;
-    margin-right: 0;
+  .project-status-container {
+    margin: 1rem;
+    color: #fff;
+    display: inline-block;
 
-    mat-icon {
-      font-size: 3rem;
-      margin-right: 1.3rem;
-    }
+    .project-status {
+      background: red;
+      padding: 3rem;
+      border-radius: 50% 50%;
+      margin-right: 0;
 
-    &.up {
-      background: green;
-    }
+      mat-icon {
+        font-size: 3rem;
+        margin-right: 1.3rem;
+      }
 
-    &.warning {
-      background: orange;
-    }
-  }
-}
+      &.up {
+        background: green;
+      }
 
-.project-status-container.small {
-  .project-status {
-    padding: 0.3rem;
-    text-align: center;
-    width: 1.5rem;
-
-    mat-icon {
-      font-size: 1.3rem;
+      &.warning {
+        background: orange;
+      }
     }
   }
-}
 
-.project-status-container.medium {
-  .project-status {
-    padding: 1.5rem;
-    text-align: center;
-    width: 1.5rem;
+  .project-status-container.small {
+    .project-status {
+      padding: 0.3rem;
+      text-align: center;
+      width: 1.5rem;
 
-    mat-icon {
-      font-size: 1.3rem;
+      mat-icon {
+        font-size: 1.3rem;
+      }
     }
+  }
+
+  .project-status-container.medium {
+    .project-status {
+      padding: 1.5rem;
+      text-align: center;
+      width: 1.5rem;
+
+      mat-icon {
+        font-size: 1.3rem;
+      }
+    }
+  }
+  
+  .status-text {
+    margin: auto auto auto 1.5rem;
   }
 }

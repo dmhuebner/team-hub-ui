@@ -1,19 +1,21 @@
-<div class="project-status-container"
-     [class.small]="size === 'small'"
-     [class.medium]="size === 'medium'"
-     *ngIf="projectStatus">
-  <div *ngIf="projectStatus.up && !projectStatus.warning" class="project-status up">
-    <mat-icon>offline_bolt</mat-icon>
+<div class="project-status-outer-wrapper">
+  <div class="project-status-container"
+       [class.small]="size === 'small'"
+       [class.medium]="size === 'medium'"
+       *ngIf="projectStatus">
+    <div *ngIf="projectStatus.up && !projectStatus.warning" class="project-status up">
+      <mat-icon>offline_bolt</mat-icon>
+    </div>
+    <div *ngIf="projectStatus.up && projectStatus.warning" class="project-status warning">
+      <mat-icon>offline_bolt</mat-icon>
+    </div>
+    <div *ngIf="!projectStatus.up" class="project-status">
+      <mat-icon>close</mat-icon>
+    </div>
   </div>
-  <div *ngIf="projectStatus.up && projectStatus.warning" class="project-status warning">
-    <mat-icon>offline_bolt</mat-icon>
-  </div>
-  <div *ngIf="!projectStatus.up" class="project-status">
-    <mat-icon>close</mat-icon>
+  <div *ngIf="!size || size === 'large'">
+    <div class="status-text" *ngIf="projectStatus.up && !projectStatus.warning"><b>Project is Up</b></div>
+    <div class="status-text" *ngIf="projectStatus.up && projectStatus.warning"><b>Warning - something is down</b></div>
+    <div class="status-text" *ngIf="!projectStatus.up"><b>Project is Down</b></div>
   </div>
 </div>
-<!--<ng-container *ngIf="projectStatus">-->
-<!--  <span *ngFor="let status of projectStatus.statuses">-->
-<!--    <span *ngIf="status.status"> - {{status.status}}</span>-->
-<!--  </span>-->
-<!--</ng-container>-->

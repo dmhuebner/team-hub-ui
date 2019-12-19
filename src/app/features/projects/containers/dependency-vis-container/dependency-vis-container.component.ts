@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import Project from '../../interfaces/project.interface';
 import ProjectStatus from '../../interfaces/project-status.interface';
 import DepDiagramConfig from '../../interfaces/dep-diagram-config.interface';
@@ -12,7 +12,7 @@ import { filter, takeUntil } from 'rxjs/operators';
   templateUrl: './dependency-vis-container.component.html',
   styleUrls: ['./dependency-vis-container.component.scss']
 })
-export class DependencyVisContainerComponent implements OnInit, OnDestroy {
+export class DependencyVisContainerComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() projectConfig: Project;
   @Input() projectStatus: ProjectStatus;
@@ -31,6 +31,10 @@ export class DependencyVisContainerComponent implements OnInit, OnDestroy {
     ).subscribe(depDiagram => {
       this.navigateToProject(depDiagram);
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.dependencyDiagram = this.createDepDiagram(this.projectConfig, this.projectStatus);
   }
 
   ngOnDestroy(): void {

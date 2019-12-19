@@ -21,6 +21,7 @@ export class ProjectStatusService {
     private stopProjectsMonitorSubject: Subject<any>;
     stopProjectsMonitor$: Observable<any>;
     projectsMonitorOn = false;
+    userTurnedOffProjectMonitor = false;
 
     constructor(private http: HttpClient,
                 private configService: ConfigService,
@@ -44,12 +45,14 @@ export class ProjectStatusService {
         console.log('Started monitoring projects - [see Debug logs for details]');
         this.projectsMonitorOn = true;
         this.projectsMonitorSocketSubject.next({projects, intervalLength});
+        this.userTurnedOffProjectMonitor = false;
     }
 
     stopMonitoring() {
         console.log('Stopped monitoring projects');
         this.projectsMonitorOn = false;
         this.stopProjectsMonitorSubject.next(true);
+        this.userTurnedOffProjectMonitor = true;
     }
 
     private openNotification(projectsStatus: ProjectsStatusOverview) {

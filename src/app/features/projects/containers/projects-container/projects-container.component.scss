@@ -1,3 +1,16 @@
+@import "src/styles";
+
+.banner {
+  &.monitor-is-off {
+    background-color: dodgerblue;
+    color: #fafafa;
+    padding: 0.5rem 1rem;
+    margin-top: 0;
+    text-align: center;
+    @include border-radius(10px)
+  }
+}
+
 .projects-header {
   display: flex;
   justify-content: space-between;

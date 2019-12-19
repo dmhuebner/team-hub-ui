@@ -33,7 +33,7 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
         tap(projectsConfig => {
           this.projectsConfig = projectsConfig.projects;
           this.intervalLength = projectsConfig.intervalLength;
-          if (!this.statusService.projectsMonitorOn) {
+          if (!this.statusService.projectsMonitorOn && !this.statusService.userTurnedOffProjectMonitor) {
             this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
           }
         }),
@@ -54,6 +54,22 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
 
   navigateToProject(navPaths) {
     return this.router.navigate(navPaths);
+  }
+
+  stopMonitoringProjects() {
+    this.statusService.stopMonitoring();
+    this.unsubscribe$.next(true);
+  }
+
+  startMonitoringProjects() {
+    this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
+    this.subscribeToProjectsMonitor();
+  }
+
+  private subscribeToProjectsMonitor() {
+    this.statusService.projectsStatusMonitor$.pipe(
+        takeUntil(this.unsubscribe$)
+    ).subscribe();
   }
 
   private getProject(projects: Project[]) {

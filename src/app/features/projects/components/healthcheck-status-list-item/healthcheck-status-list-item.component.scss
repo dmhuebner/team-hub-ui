@@ -2,7 +2,7 @@
 
 .healthcheck-item-container {
   border: 1px solid #ccc;
-  @include border-radius(5px);
+  @include border-radius(10px);
   padding: 0 1rem;
 
   .healthcheck-name {

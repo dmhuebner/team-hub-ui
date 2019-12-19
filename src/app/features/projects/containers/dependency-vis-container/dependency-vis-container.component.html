@@ -1,7 +1,14 @@
 <div class="dep-diagram-container">
   <h4 class="dep-map-header">Dependencies Map</h4>
   <div class="diagram">
-    <div class="project-name">{{projectConfig.name}}:</div>
+    <div class="project-name"
+         [ngClass]="{
+                      'up': projectStatus.up && !projectStatus.warning,
+                      'warning': projectStatus.up && projectStatus.warning,
+                      'down': !projectStatus.up
+                    }">
+      {{projectConfig.name}}:
+    </div>
     <app-dependency-visualization
             [projectConfig]="projectConfig"
             [dependencyDiagram]="dependencyDiagram">

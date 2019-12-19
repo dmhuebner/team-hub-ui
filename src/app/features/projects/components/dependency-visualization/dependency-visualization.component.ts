@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Project from '../../interfaces/project.interface';
+import DepDiagramConfig from '../../interfaces/dep-diagram-config.interface';
+import { DepDiagramService } from '../../services/dep-diagram.service';
 
 @Component({
   selector: 'app-dependency-visualization',
@@ -9,11 +11,16 @@ import Project from '../../interfaces/project.interface';
 export class DependencyVisualizationComponent implements OnInit {
 
   @Input() projectConfig: Project;
-  @Input() dependencyDiagram: any;
+  @Input() dependencyDiagram: DepDiagramConfig[];
 
-  constructor() { }
+  constructor(private depDiagramService: DepDiagramService) { }
 
   ngOnInit() {
+  }
+
+  navigate(projectDepDiagram: DepDiagramConfig) {
+    this.depDiagramService.navRequestSubject.next(projectDepDiagram);
+    this.depDiagramService.navRequestSubject.next(null);
   }
 
 }

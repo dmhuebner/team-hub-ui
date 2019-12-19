@@ -1,33 +1,96 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import Project from '../../interfaces/project.interface';
+import ProjectStatus from '../../interfaces/project-status.interface';
+import DepDiagramConfig from '../../interfaces/dep-diagram-config.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DepDiagramService } from '../../services/dep-diagram.service';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dependency-vis-container',
   templateUrl: './dependency-vis-container.component.html',
   styleUrls: ['./dependency-vis-container.component.scss']
 })
-export class DependencyVisContainerComponent implements OnInit {
+export class DependencyVisContainerComponent implements OnInit, OnDestroy {
 
   @Input() projectConfig: Project;
-  dependencyDiagram = [];
+  @Input() projectStatus: ProjectStatus;
+  dependencyDiagram: DepDiagramConfig[] = [];
+  unsubscribe$ = new Subject<boolean>();
 
-  constructor() { }
+  constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private depDiagramService: DepDiagramService) { }
 
   ngOnInit() {
-    this.dependencyDiagram = this.createDepDiagram(this.projectConfig);
+    this.dependencyDiagram = this.createDepDiagram(this.projectConfig, this.projectStatus);
+    this.depDiagramService.navRequest$.pipe(
+        filter(depDiagram => !!depDiagram),
+        takeUntil(this.unsubscribe$)
+    ).subscribe(depDiagram => {
+      this.navigateToProject(depDiagram);
+    });
   }
 
-  private createDepDiagram(projectConfig: Project, diagramArray = []): any {
+  ngOnDestroy(): void {
+    this.unsubscribe$.next(true);
+  }
+
+  navigateToProject(depDiagram: DepDiagramConfig) {
+    const currentParams = this.activatedRoute.snapshot.paramMap.keys.map(param => this.activatedRoute.snapshot.paramMap.get(param));
+    this.router.navigate([
+      'projects',
+      ...currentParams.slice(0, currentParams.length - 1),
+      ...depDiagram.trace,
+      depDiagram.name
+    ]);
+  }
+
+  private createDepDiagram(projectConfig: Project, projectStatus: ProjectStatus, trace?: string[], diagramArray = []): any {
     if (projectConfig.dependencies && projectConfig.dependencies.length) {
       projectConfig.dependencies.forEach((dep) => {
+        trace = trace ? [...trace] : [];
+        if (trace[trace.length - 1] !== projectConfig.name) {
+          trace.push(projectConfig.name);
+        }
         if (dep.dependencies && dep.dependencies.length) {
-          diagramArray.push({name: dep.name, deps: this.createDepDiagram(dep, [])});
+          const statusText = this.getStatusText(projectStatus.dependencies[dep.name]);
+          diagramArray.push({
+            name: dep.name,
+            statusText,
+            trace,
+            deps: this.createDepDiagram(dep, projectStatus.dependencies[dep.name], trace)
+          });
         } else {
-          diagramArray.push({name: dep.name});
+          const statusText = this.getStatusText(projectStatus.dependencies[dep.name]);
+          diagramArray.push({
+            name: dep.name,
+            statusText,
+            trace,
+          });
         }
       });
     }
     return diagramArray;
+  }
+
+  private getStatusText(projectStatus: ProjectStatus) {
+    let statusText = '';
+
+    if (projectStatus.up && !projectStatus.warning) {
+      statusText = 'up';
+    }
+
+    if (projectStatus.up && projectStatus.warning) {
+      statusText = 'warning';
+    }
+
+    if (!projectStatus.up) {
+      statusText = 'down';
+    }
+
+    return statusText;
   }
 
 }

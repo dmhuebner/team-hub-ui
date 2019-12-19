@@ -1,6 +1,15 @@
 <div class="dep-diagram">
     <span *ngFor="let project of dependencyDiagram; let i = index">
-      <div>{{project.name}}<span *ngIf="project.deps && project.deps.length">:</span></div>
+      <div class="project-name"
+           (click)="navigate(project)"
+           [ngClass]="{
+                      'up': project.statusText === 'up',
+                      'warning': project.statusText === 'warning',
+                      'down': project.statusText === 'down'
+                    }">
+          {{project.name}}
+          <span *ngIf="project.deps && project.deps.length">:</span>
+      </div>
       <span *ngIf="project.deps && project.deps.length">
         <app-dependency-visualization
                 [projectConfig]="projectConfig.dependencies[i]"

@@ -2,10 +2,27 @@
 
 .dep-diagram-container {
   .diagram {
-    background: #555;
+    background: #343434;
     color: #FAFAFA;
     padding: 2rem;
     @include border-radius(10px);
+
+    .project-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+
+      &.up {
+        color: #089322;
+      }
+
+      &.warning {
+        color: orange;
+      }
+
+      &.down {
+        color: red;
+      }
+    }
   }
 
   .project-dependency-list {

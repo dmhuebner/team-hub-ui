@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'projects',
     component: ProjectsPageComponent,
-    loadChildren: () => import('./features/projects/projects.module').then(m => m.ProjectsModule),
+    loadChildren: './features/projects/projects.module#ProjectsModule',
   },
   { path: '**', component: NotFoundComponent }
 ];

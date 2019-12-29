@@ -3,11 +3,28 @@
     "name": "Some Team",
     "description": "Some description of the team",
     "checkProjectsEvery": 900000,
-    "resources": {
-      "repositories": "https://github.com/some-team",
-      "projectManagement": "https://jira.com/some-team",
-      "teamDocumentation": "https://confluence.com/some-team"
-    },
+    "resources": [
+      {
+        "url": "https://github.com/some-team",
+        "name": "Github",
+        "description": "Version Control"
+      },
+      {
+        "url": "https://jira.com/some-team",
+        "name": "Jira",
+        "description": "Project Management"
+      },
+      {
+        "url": "https://confluence.com/some-team",
+        "name": "Confluence",
+        "description": "Team Documentation"
+      },
+      {
+        "url": "https://slack.com/some-team",
+        "name": "Slack",
+        "description": "Team Chat"
+      }
+    ],
     "members": [
       {
         "name": "David Huebner",

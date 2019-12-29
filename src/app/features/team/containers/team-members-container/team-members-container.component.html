@@ -1,0 +1,10 @@
+<section class="team-members-container" *ngIf="teamMembers">
+  <div class="team-member" *ngFor="let member of teamMembers">
+    <p>{{member.name}}</p>
+    <p>{{member.role}}</p>
+    <p><a [href]="'mailto:' + member.email">{{member.email}}</a></p>
+    <p *ngIf="member.favTech" class="team-member-fav-tech">
+      {{member.favTech.join(', ')}}
+    </p>
+  </div>
+</section>

@@ -1,3 +1,5 @@
 <div class="home-page-container">
-  Here is the home page!
+  <ng-container *ngIf="configService.currentConfig$ | async as currentConfig">
+    <app-team-container [teamConfig]="currentConfig.team"></app-team-container>
+  </ng-container>
 </div>

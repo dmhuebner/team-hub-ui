@@ -1,0 +1,35 @@
+@import 'src/styles';
+
+.team-members-container {
+  display: flex;
+  flex-direction: column;
+
+  .team-member {
+    border: 1px solid #dedede;
+    @include border-radius(10px);
+    padding: 1rem;
+    margin: 1rem;
+    width: 15rem;
+
+    a {
+      text-decoration: none;
+      color: #3F51B5;
+      font-weight: bold;
+
+      &:hover {
+        color: #00b55d;
+      }
+    }
+
+    .team-member-fav-tech {
+      color: #787878;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media all and (min-width: 675px) {
+  .team-members-container {
+    flex-direction: row;
+  }
+}

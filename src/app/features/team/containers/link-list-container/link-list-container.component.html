@@ -1,0 +1,10 @@
+<section class="link-list-container" *ngIf="teamResources">
+  <div *ngFor="let resource of teamResources">
+    <p>
+      <a [href]="resource.url" target="_blank">
+        {{resource.name}}
+      </a>
+      <span class="link-type-label"> - {{resource.description}}</span>
+    </p>
+  </div>
+</section>

@@ -21,6 +21,7 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
   projectsStatus: ProjectStatus;
   unsubscribe$ = new Subject<boolean>();
   dependencyNavRef: string[] = [];
+  projectsMonitorOn: boolean;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -33,12 +34,16 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
         tap(projectsConfig => {
           this.projectsConfig = projectsConfig.projects;
           this.intervalLength = projectsConfig.intervalLength;
-          if (!this.statusService.projectsMonitorOn && !this.statusService.userTurnedOffProjectMonitor) {
-            this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
-          }
         }),
         map(projectsConfig => this.getProject(projectsConfig.projects)),
         tap(project => this.project = project),
+        switchMap(() => this.statusService.projectsMonitorOn$),
+        tap(projMonitorOn => {
+          if (this.projectsConfig && this.intervalLength && !this.projectsMonitorOn && projMonitorOn) {
+            this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
+          }
+          this.projectsMonitorOn = projMonitorOn;
+        }),
         switchMap(() => this.getProjectStatus()),
         takeUntil(this.unsubscribe$)
     ).subscribe(statusOverview => this.projectsStatus = statusOverview);
@@ -48,31 +53,25 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next(true);
   }
 
-  goBack() {
-    this.router.navigate(['projects']);
+  goBack(): Promise<boolean> {
+    return this.router.navigate(['projects']);
   }
 
-  navigateToProject(navPaths) {
+  navigateToProject(navPaths): Promise<boolean> {
     return this.router.navigate(navPaths);
   }
 
-  stopMonitoringProjects() {
+  stopMonitoringProjects(): void {
+    this.projectsMonitorOn = false;
     this.statusService.stopMonitoring();
-    this.unsubscribe$.next(true);
   }
 
-  startMonitoringProjects() {
+  startMonitoringProjects(): void {
+    this.projectsMonitorOn = true;
     this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
-    this.subscribeToProjectsMonitor();
   }
 
-  private subscribeToProjectsMonitor() {
-    this.statusService.projectsStatusMonitor$.pipe(
-        takeUntil(this.unsubscribe$)
-    ).subscribe();
-  }
-
-  private getProject(projects: Project[]) {
+  private getProject(projects: Project[]): Project {
     const routeParams = this.route.snapshot.paramMap.keys;
     const dependencyList = routeParams.map(param => this.route.snapshot.paramMap.get(param));
     this.dependencyNavRef = dependencyList.slice(0, dependencyList.length - 1);

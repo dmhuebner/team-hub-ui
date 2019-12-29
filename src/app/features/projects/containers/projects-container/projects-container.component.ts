@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import Project from '../../interfaces/project.interface';
 import { ProjectStatusService } from '../../services/project-status.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ProjectConfigService } from '../../services/project-config.service';
 import ProjectsStatusOverview from '../../interfaces/projects-status-overview.interface';
 
@@ -18,6 +18,7 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
 
   projectsStatusOverview: ProjectsStatusOverview;
   unsubscribe$: Subject<boolean> = new Subject();
+  projectsMonitorOn: boolean;
 
   constructor(public statusService: ProjectStatusService,
               private projectConfigService: ProjectConfigService) { }
@@ -25,13 +26,17 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (!this.projectsConfig) {
       this.projectConfigService.projectsConfig$.pipe(
+          tap(config => {
+            this.projectsConfig = config.projects;
+            this.intervalLength = config.intervalLength;
+          }),
+          switchMap(() => this.statusService.projectsMonitorOn$),
           takeUntil(this.unsubscribe$)
-      ).subscribe((config) => {
-        this.projectsConfig = config.projects;
-        this.intervalLength = config.intervalLength;
-        if (!this.statusService.projectsMonitorOn && !this.statusService.userTurnedOffProjectMonitor) {
+      ).subscribe(projMonitorOn => {
+        if (this.projectsConfig && this.intervalLength && !this.projectsMonitorOn && projMonitorOn) {
           this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
         }
+        this.projectsMonitorOn = projMonitorOn;
       });
     }
 
@@ -44,12 +49,12 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
 
   stopMonitoringProjects() {
     this.statusService.stopMonitoring();
-    this.unsubscribe$.next(true);
+    this.projectsMonitorOn = false;
   }
 
   startMonitoringProjects() {
     this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
-    this.subscribeToProjectsMonitor();
+    this.projectsMonitorOn = true;
   }
 
   private subscribeToProjectsMonitor() {

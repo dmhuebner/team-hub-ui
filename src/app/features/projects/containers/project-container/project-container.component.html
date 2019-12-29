@@ -1,6 +1,6 @@
 <ng-container *ngIf="project">
   <h6 class="banner monitor-is-off"
-      *ngIf="!statusService.projectsMonitorOn">
+      *ngIf="!(statusService.projectsMonitorOn$ | async)">
     MONITOR IS OFF
   </h6>
   <section class="project-header">
@@ -11,7 +11,7 @@
             (navigatedBack)="goBack()">
     </app-dependency-nav>
     <app-monitor-info
-            [monitorOn]="statusService.projectsMonitorOn"
+            [monitorOn]="statusService.projectsMonitorOn$ | async"
             [monitorCountdown]="statusService.projectsMonitorCountdown$ | async"
             [intervalLength]="intervalLength"
             [hasConfig]="!!(projectsConfig && projectsConfig.length)"

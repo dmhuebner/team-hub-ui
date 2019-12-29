@@ -1,0 +1,37 @@
+<div class="project-links" *ngIf="projectConfig">
+        <span *ngIf="projectConfig.uiPath">
+          <p class="projectConfig-repo">
+            <a [href]="projectConfig.uiPath" target="_blank">
+              User Interface
+            </a>
+          </p>
+        </span>
+  <span *ngIf="projectConfig.repoPath">
+          <p class="projectConfig-repo">
+            <a [href]="projectConfig.repoPath" target="_blank">
+              Code
+            </a>
+          </p>
+        </span>
+  <span *ngIf="projectConfig.docsPath">
+          <p class="projectConfig-repo">
+            <a [href]="projectConfig.docsPath" target="_blank">
+              Documentation
+            </a>
+          </p>
+        </span>
+  <span *ngIf="projectConfig.logsPath">
+          <p class="projectConfig-repo">
+            <a [href]="projectConfig.logsPath" target="_blank">
+              Logs
+            </a>
+          </p>
+        </span>
+  <span *ngIf="projectConfig.deploymentPath">
+          <p class="projectConfig-repo">
+            <a [href]="projectConfig.deploymentPath" target="_blank">
+              Deployment
+            </a>
+          </p>
+        </span>
+</div>

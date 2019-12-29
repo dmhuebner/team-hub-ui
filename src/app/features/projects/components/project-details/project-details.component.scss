@@ -14,12 +14,15 @@
   .project-details-inner-wrapper {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 
     .project-info {
-      width: 45%;
+      width: 90%;
 
-      .project-description {
+      .project-description,
+      .project-debug-tips {
         margin-left: 1rem;
+        font-family: Arial, sans-serif;
       }
 
       .dep-map-container {
@@ -28,7 +31,7 @@
     }
 
     .project-status-container {
-      width: 45%;
+      width: 90%;
 
       .project-status {
         width: auto;
@@ -40,4 +43,26 @@
     }
   }
 
+}
+
+/* Larger than tablet */
+@media all and (min-width: 1021px) {
+  .project-details-container {
+    .project-details-inner-wrapper {
+      flex-direction: row;
+
+      .project-info {
+        width: 45%;
+        margin-top: 0;
+
+        .project-links {
+          margin-top: 0;
+        }
+      }
+
+      .project-status-container {
+        width: 45%;
+      }
+    }
+  }
 }

@@ -19,6 +19,7 @@ import { HealthcheckStatusListItemComponent } from './components/healthcheck-sta
 import { DependencyVisualizationComponent } from './components/dependency-visualization/dependency-visualization.component';
 import { DependencyVisContainerComponent } from './containers/dependency-vis-container/dependency-vis-container.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ProjectLinksComponent } from './components/project-links/project-links.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       DependencyNavComponent,
       HealthcheckStatusListItemComponent,
       DependencyVisualizationComponent,
-      DependencyVisContainerComponent
+      DependencyVisContainerComponent,
+      ProjectLinksComponent
   ],
     imports: [
         CommonModule,

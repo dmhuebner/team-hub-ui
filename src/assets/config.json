@@ -33,10 +33,26 @@
         "favTech": ["JavaScript", "Angular", "Node", "Go"]
       },
       {
-        "name": "Joe Shmo",
+        "name": "Sara Foobar",
         "role": "Developer",
         "email": "joe.shmo@gmail.com",
         "favTech": ["JavaScript", "React", "Java", "Go"]
+      },
+      {
+        "name": "Bill Someone",
+        "role": "Developer",
+        "email": "Bill.Someone@gmail.com",
+        "favTech": ["JavaScript", "React", "Java", "Go"]
+      },
+      {
+        "name": "John Doe",
+        "role": "QA Engineer",
+        "email": "John.Doe@gmail.com"
+      },
+      {
+        "name": "Joe Shmo",
+        "role": "Product Owner",
+        "email": "joe.shmo@gmail.com"
       }
     ],
     "projects": [
@@ -72,14 +88,7 @@
             "docsPath": "https://github.com/dmhuebner/pomodor",
             "logsPath": "https://kibana.com/pomodor",
             "deploymentPath": "https://heroku.com/pomodor",
-            "healthChecks": [
-              {
-                "name": "some-api check",
-                "path": "https://api.github.com/users/octocat",
-                "successStatuses": [200],
-                "method": "GET"
-              }
-            ],
+            "healthChecks": [],
             "dependencies": [
               {
                 "name": "another-api",

@@ -6,7 +6,15 @@
               [projectStatus]="projectStatus">
       </app-project-status>
       <div class="project-status">
-        <p class="health-check-list-label"><b>Health Checks</b></p>
+        <p class="health-check-list-label"
+           *ngIf="projectStatus.statuses && projectStatus.statuses.length; else noHealthChecks">
+          <b>Health Checks</b>
+        </p>
+        <ng-template #noHealthChecks>
+          <p>
+            No health checks for this project. Check dependencies below.
+          </p>
+        </ng-template>
         <app-healthcheck-status-list-item [projectStatus]="projectStatus">
         </app-healthcheck-status-list-item>
       </div>

@@ -2,7 +2,8 @@
 
 .team-members-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
 
   .team-member {
     border: 1px solid #dedede;
@@ -25,12 +26,5 @@
       color: #787878;
       font-size: 0.9rem;
     }
-  }
-}
-
-/* Larger than mobile */
-@media all and (min-width: 675px) {
-  .team-members-container {
-    flex-direction: row;
   }
 }

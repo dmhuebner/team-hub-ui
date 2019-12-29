@@ -1,0 +1,15 @@
+<section>
+  <h1>{{teamConfig.name}}</h1>
+  <div class="team-row" *ngIf="teamConfig.resources">
+    <h4>Links</h4>
+    <app-link-list-container
+            [teamResources]="teamConfig.resources">
+    </app-link-list-container>
+  </div>
+  <div class="team-row" *ngIf="teamConfig.members">
+    <h4>Team Members</h4>
+    <app-team-members-container
+            [teamMembers]="teamConfig.members">
+    </app-team-members-container>
+  </div>
+</section>

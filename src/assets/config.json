@@ -43,8 +43,13 @@
       {
         "name": "Pomodor",
         "description": "Time keeping and task list app that uses the pomodoro technique",
+        "debugTips": "Check the Logs from logger Api.\nCheck the API that goes down a lot.",
         "appType": "UI",
         "uiPath": "https://pomodor.herokuapp.com/home",
+        "repoPath": "https://github.com/dmhuebner/pomodor",
+        "docsPath": "https://github.com/dmhuebner/pomodor",
+        "logsPath": "https://kibana.com/pomodor",
+        "deploymentPath": "https://heroku.com/pomodor",
         "healthChecks": [
           {
             "name": "pom dep check",
@@ -61,7 +66,12 @@
           {
             "name": "some-api",
             "description": "Some API that does important stuff",
+            "debugTips": "Check the Logs from logger Api.\nCheck the API that goes down a lot.",
             "appType": "API",
+            "repoPath": "https://github.com/dmhuebner/pomodor",
+            "docsPath": "https://github.com/dmhuebner/pomodor",
+            "logsPath": "https://kibana.com/pomodor",
+            "deploymentPath": "https://heroku.com/pomodor",
             "healthChecks": [
               {
                 "name": "some-api check",
@@ -74,7 +84,12 @@
               {
                 "name": "another-api",
                 "description": "Another API that does other stuff",
+                "debugTips": "Check the Logs from logger Api.\nCheck the API that goes down a lot.",
                 "appType": "API",
+                "repoPath": "https://github.com/dmhuebner/pomodor",
+                "docsPath": "https://github.com/dmhuebner/pomodor",
+                "logsPath": "https://kibana.com/pomodor",
+                "deploymentPath": "https://heroku.com/pomodor",
                 "healthChecks": [
                   {
                     "name": "another-api check",
@@ -93,7 +108,12 @@
               {
                 "name": "another-api2",
                 "description": "Another API that does other stuff",
+                "debugTips": "Check the Logs from logger Api.\nCheck the API that goes down a lot.",
                 "appType": "API",
+                "repoPath": "https://github.com/dmhuebner/pomodor",
+                "docsPath": "https://github.com/dmhuebner/pomodor",
+                "logsPath": "https://kibana.com/pomodor",
+                "deploymentPath": "https://heroku.com/pomodor",
                 "healthChecks": [
                   {
                     "name": "another-api2 check",
@@ -111,7 +131,12 @@
                   {
                     "name": "another-api3",
                     "description": "Another API that does other stuff",
+                    "debugTips": "Check the Logs from logger Api.\nCheck the API that goes down a lot.",
                     "appType": "API",
+                    "repoPath": "https://github.com/dmhuebner/pomodor",
+                    "docsPath": "https://github.com/dmhuebner/pomodor",
+                    "logsPath": "https://kibana.com/pomodor",
+                    "deploymentPath": "https://heroku.com/pomodor",
                     "healthChecks": [
                       {
                         "name": "another-api3 check",
@@ -134,7 +159,11 @@
           {
             "name": "github-api",
             "description": "Github API that does other stuff",
+            "debugTips": "Check the Logs from logger Api.\nCheck the API that goes down a lot.",
             "appType": "API",
+            "repoPath": "https://github.com/dmhuebner/pomodor",
+            "docsPath": "https://github.com",
+            "deploymentPath": "https://heroku.com/pomodor",
             "healthChecks": [
               {
                 "name": "github api check 1",
@@ -162,7 +191,12 @@
       {
         "name": "Other Thing",
         "description": "Some other thing that uses the pomodoro technique",
+        "debugTips": "Check the Logs from logger Api.\nCheck the API that goes down a lot.",
         "uiPath": "https://other-thing.herokuapp.com/home",
+        "repoPath": "https://github.com/dmhuebner/other-thing",
+        "docsPath": "https://github.com/dmhuebner/other-thing",
+        "logsPath": "https://kibana.com/pomodor",
+        "deploymentPath": "https://heroku.com/pomodor",
         "healthChecks": [
           {
             "name": "other thing check",

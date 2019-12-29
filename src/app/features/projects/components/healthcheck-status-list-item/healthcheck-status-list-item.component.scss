@@ -24,8 +24,15 @@
     margin-left: 1rem;
     margin-bottom: 2rem;
 
+    .success-criteria {
+      margin-left: 1rem;
+    }
+
     .status-code {
-      color: #FF0000;
+
+      &.down {
+        color: #FF0000;
+      }
 
       &.up {
         color: green;
@@ -34,6 +41,12 @@
 
     .timestamp {
       font-size: 0.87rem;
+    }
+
+    .response-body {
+      border: 1px solid #ededed;
+      padding: 0.5rem;
+      overflow: scroll;
     }
   }
 

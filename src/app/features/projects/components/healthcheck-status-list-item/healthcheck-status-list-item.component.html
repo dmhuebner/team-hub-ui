@@ -12,16 +12,27 @@
     <div class="healthcheck-status-wrapper"
          [class.up]="status.up">
       <p>
-        status:
-        <span class="status-code" [class.up]="status.up"> <b>{{status.status}}</b></span>
+        Status:
+        <span class="status-code"
+              [class.up]="status.successCriteria.successStatuses.includes(status.status)"
+              [class.down]="!status.successCriteria.successStatuses.includes(status.status)">
+          <b> {{status.status}}</b>
+        </span>
         <span *ngIf="!status.status">No response</span>
       </p>
       <span>{{status.method}}</span> - <b>{{status.path}}</b>
-      <p>timestamp: <b class="timestamp">{{status.timestamp | date: 'medium'}}</b></p>
-      <p>success statuses: [ {{status.successStatuses.join(', ')}} ]</p>
-      <span *ngIf="status.responseBody">response body</span> -
+      <p>Timestamp: <b class="timestamp">{{status.timestamp | date: 'medium'}}</b></p>
+      <span *ngIf="status.responseBody">Response Body</span> -
       <button (click)="toggleRespBodyView(i)" mat-flat-button>{{viewResponseBody[i] ? 'hide' : 'view'}}</button>
-      <pre *ngIf="viewResponseBody[i]">{{status.responseBody | json}}</pre>
+      <pre class="response-body" *ngIf="viewResponseBody[i]">{{status.responseBody | json}}</pre>
+      <p>Success Criteria:</p>
+      <div class="success-criteria">
+        <p>Success Statuses: [ {{status.successCriteria.successStatuses.join(', ')}} ]</p>
+        <app-success-response-body
+                [successResponseBody]="status.successCriteria.successResponseBody"
+                [invalidResponseBody]="status.invalidResponseBody">
+        </app-success-response-body>
+      </div>
     </div>
   </div>
 </ng-container>

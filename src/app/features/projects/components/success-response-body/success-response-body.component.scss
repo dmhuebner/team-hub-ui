@@ -1,0 +1,13 @@
+.success-response-body-label {
+  color: green;
+
+  &.invalid-response-body {
+    color: red;
+  }
+}
+
+.response-body {
+  border: 1px solid #ededed;
+  padding: 0.5rem;
+  overflow: scroll;
+}

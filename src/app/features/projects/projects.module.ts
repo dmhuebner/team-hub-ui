@@ -20,6 +20,8 @@ import { DependencyVisualizationComponent } from './components/dependency-visual
 import { DependencyVisContainerComponent } from './containers/dependency-vis-container/dependency-vis-container.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProjectLinksComponent } from './components/project-links/project-links.component';
+import { JsonParsePipe } from './pipes/json-parse.pipe';
+import { SuccessResponseBodyComponent } from './components/success-response-body/success-response-body.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ProjectLinksComponent } from './components/project-links/project-links.
       HealthcheckStatusListItemComponent,
       DependencyVisualizationComponent,
       DependencyVisContainerComponent,
-      ProjectLinksComponent
+      ProjectLinksComponent,
+      JsonParsePipe,
+      SuccessResponseBodyComponent
   ],
     imports: [
         CommonModule,

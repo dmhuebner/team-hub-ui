@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { shareReplay, tap } from 'rxjs/operators';
 import { ConfigService } from '../../../shared/services/config.service';
 import Project from '../interfaces/project.interface';
@@ -20,8 +20,8 @@ export class ProjectStatusService {
 
     private stopProjectsMonitorSubject: Subject<any>;
     stopProjectsMonitor$: Observable<any>;
-    projectsMonitorOn = false;
-    userTurnedOffProjectMonitor = false;
+    projectsMonitorOnSubject = new BehaviorSubject(false);
+    projectsMonitorOn$ = this.projectsMonitorOnSubject.asObservable();
 
     constructor(private http: HttpClient,
                 private configService: ConfigService,
@@ -36,23 +36,30 @@ export class ProjectStatusService {
         );
 
         this.stopProjectsMonitorSubject = stopProjectsMonitorSubject;
-        this.stopProjectsMonitor$ = this.stopProjectsMonitorSubject.asObservable().pipe(shareReplay(1));
+        this.stopProjectsMonitor$ = this.stopProjectsMonitorSubject.asObservable().pipe(
+            shareReplay(1)
+        );
 
-        this.projectsMonitorCountdown$ = projectsMonitorCountdown$.pipe(shareReplay(1));
+        this.projectsMonitorCountdown$ = projectsMonitorCountdown$.pipe(
+            tap(monitorCount => {
+                if (monitorCount === null) {
+                    this.projectsMonitorOnSubject.next(false);
+                } else {
+                    this.projectsMonitorOnSubject.next(true);
+                }
+            }),
+            shareReplay(1)
+        );
     }
 
     startMonitoring(projects: Project[], intervalLength) {
         console.log('Started monitoring projects - [see Debug logs for details]');
-        this.projectsMonitorOn = true;
         this.projectsMonitorSocketSubject.next({projects, intervalLength});
-        this.userTurnedOffProjectMonitor = false;
     }
 
     stopMonitoring() {
         console.log('Stopped monitoring projects');
-        this.projectsMonitorOn = false;
         this.stopProjectsMonitorSubject.next(true);
-        this.userTurnedOffProjectMonitor = true;
     }
 
     private openNotification(projectsStatus: ProjectsStatusOverview) {

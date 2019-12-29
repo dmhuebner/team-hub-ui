@@ -1,12 +1,12 @@
 <h6 class="banner monitor-is-off"
-    *ngIf="!statusService.projectsMonitorOn">
+    *ngIf="!projectsMonitorOn">
   MONITOR IS OFF
 </h6>
 <header class="projects-header">
   <h1 class="heading">Projects</h1>
   <div class="monitor-info">
     <app-monitor-info
-            [monitorOn]="statusService.projectsMonitorOn"
+            [monitorOn]="projectsMonitorOn"
             [monitorCountdown]="statusService.projectsMonitorCountdown$ | async"
             [intervalLength]="intervalLength"
             [hasConfig]="!!(projectsConfig && projectsConfig.length)"

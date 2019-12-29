@@ -1,0 +1,18 @@
+<div *ngIf="successResponseBody">
+  <span class="success-response-body-label" [class.invalid-response-body]="invalidResponseBody">Success Response Body</span> -
+  <button mat-flat-button (click)="toggleShowSuccessResBody()">
+    {{showSuccessResponseBody ? 'hide' : 'view'}}
+  </button>
+  <div>
+    <div *ngIf="successResponseBody.responseBodyContains && showSuccessResponseBody">
+      must contain {{successResponseBody.type}}:
+      <pre class="response-body">{{successResponseBody.responseBodyContains | jsonParse | json}}</pre>
+    </div>
+  </div>
+  <div>
+    <div *ngIf="successResponseBody.responseBodyEquals && showSuccessResponseBody">
+      must equal {{successResponseBody.type}}:
+      <pre class="response-body">{{successResponseBody.responseBodyEquals | jsonParse | json}}</pre>
+    </div>
+  </div>
+</div>

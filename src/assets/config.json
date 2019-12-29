@@ -70,7 +70,9 @@
           {
             "name": "pom dep check",
             "path": "http://api.github.com/users/octocat",
-            "successStatuses": [200],
+            "successCriteria": {
+              "successStatuses": [200]
+            },
             "method": "GET",
             "headers": {
               "Authorization": "basic 5678765789asdsdfgdshf==",
@@ -103,7 +105,9 @@
                   {
                     "name": "another-api check",
                     "path": "http://localhost:3001/post",
-                    "successStatuses": [200, 400],
+                    "successCriteria": {
+                      "successStatuses": [200, 400]
+                    },
                     "method": "POST",
                     "requestBody": "{foo: 'bar', stuff: true}",
                     "headers": {
@@ -127,7 +131,13 @@
                   {
                     "name": "another-api2 check",
                     "path": "https://api.github.com/users/octocat",
-                    "successStatuses": [200, 403],
+                    "successCriteria": {
+                      "successStatuses": [200, 403, 404],
+                      "successResponseBody": {
+                        "type": "string",
+                        "responseBodyEquals": "Request failed with status code 404"
+                      }
+                    },
                     "method": "POST",
                     "requestBody": "{foo: 'bar', stuff: true}",
                     "headers": {
@@ -150,7 +160,9 @@
                       {
                         "name": "another-api3 check",
                         "path": "https://api.github.com/users/octocat",
-                        "successStatuses": [200, 403],
+                        "successCriteria": {
+                          "successStatuses": [200, 403]
+                        },
                         "method": "POST",
                         "requestBody": "{foo: 'bar', stuff: true}",
                         "headers": {
@@ -177,19 +189,37 @@
               {
                 "name": "github api check 1",
                 "path": "https://api.github.com/users/octocat",
-                "successStatuses": [200],
+                "successCriteria": {
+                  "successStatuses": [403],
+                  "successResponseBody": {
+                    "type": "string",
+                    "responseBodyContains": "failed"
+                  }
+                },
                 "method": "GET"
               },
               {
                 "name": "github api check 2",
                 "path": "https://api.github.com/users/octocat",
-                "successStatuses": [200],
+                "successCriteria": {
+                  "successStatuses": [200],
+                  "successResponseBody": {
+                    "type": "json",
+                    "responseBodyEquals": "{\"login\":\"octocat\",\"id\":583231,\"node_id\":\"MDQ6VXNlcjU4MzIzMQ==\",\"avatar_url\":\"https://avatars3.githubusercontent.com/u/583231?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/octocat\",\"html_url\":\"https://github.com/octocat\",\"followers_url\":\"https://api.github.com/users/octocat/followers\",\"following_url\":\"https://api.github.com/users/octocat/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/octocat/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/octocat/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/octocat/subscriptions\",\"organizations_url\":\"https://api.github.com/users/octocat/orgs\",\"repos_url\":\"https://api.github.com/users/octocat/repos\",\"events_url\":\"https://api.github.com/users/octocat/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/octocat/received_events\",\"type\":\"User\",\"site_admin\":false,\"name\":\"The Octocat\",\"company\":\"GitHub\",\"blog\":\"http://www.github.com/blog\",\"location\":\"San Francisco\",\"email\":null,\"hireable\":null,\"bio\":null,\"public_repos\":8,\"public_gists\":8,\"followers\":2903,\"following\":9,\"created_at\":\"2011-01-25T18:44:36Z\",\"updated_at\":\"2019-11-22T15:27:59Z\"}"
+                  }
+                },
                 "method": "GET"
               },
               {
                 "name": "github api check 3",
-                "path": "https://api.github.com/users/octocat",
-                "successStatuses": [200],
+                "path": "https://api.github.com/users/octocatt",
+                "successCriteria": {
+                  "successStatuses": [404],
+                  "successResponseBody": {
+                    "type": "string",
+                    "responseBodyContains": "404"
+                  }
+                },
                 "method": "GET"
               }
             ],
@@ -210,9 +240,9 @@
           {
             "name": "other thing check",
             "path": "https://api.github.com/users/octocat",
-            "successStatuses": [
-              200
-            ],
+            "successCriteria": {
+              "successStatuses": [200]
+            },
             "method": "GET"
           }
         ],
@@ -225,9 +255,9 @@
               {
                 "name": "other thing2 check",
                 "path": "https://api.github.com/users/octocat",
-                "successStatuses": [
-                  200
-                ],
+                "successCriteria": {
+                  "successStatuses": [200]
+                },
                 "method": "GET"
               }
             ],
@@ -241,9 +271,9 @@
               {
                 "name": "other thing3 check",
                 "path": "https://api.github.com/users/octocatt",
-                "successStatuses": [
-                  200
-                ],
+                "successCriteria": {
+                  "successStatuses": [200]
+                },
                 "method": "GET"
               }
             ],
@@ -258,21 +288,21 @@
         "healthChecks": [
           {
             "path": "https://api.github.com/users/octocat",
-            "successStatuses": [
-              200
-            ],
+            "successCriteria": {
+              "successStatuses": [200]
+            },
             "method": "GET"
           },
           {
             "path": "https://api.github.com/users/octocat",
-            "successStatuses": [
-              200
-            ],
+            "successCriteria": {
+              "successStatuses": [200]
+            },
             "method": "GET"
           }
         ],
         "dependencies": [
-          {"name":"mke syeigrf wlv","description":"ddud boxni rauwc mpko ysit xho qhdpcdhr aiyasej","uiPath":"https://ddfjjfilfmfrppxdublipwhds/mhd","healthChecks": [{"path":"https://api.github.com/users/octocatt","successStatuses":[200], "method": "GET"}], "dependencies":[]}
+          {"name":"mke syeigrf wlv","description":"ddud boxni rauwc mpko ysit xho qhdpcdhr aiyasej","uiPath":"https://ddfjjfilfmfrppxdublipwhds/mhd","healthChecks": [{"path":"https://api.github.com/users/octocatt","successCriteria":  {"successStatuses":[200]}, "method": "GET"}], "dependencies":[]}
         ]
       }
     ]

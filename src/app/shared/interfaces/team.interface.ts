@@ -7,6 +7,6 @@ export default interface Team {
     description: string;
     resources?: Resource[];
     members: TeamMember[];
-    projects: Project[];
-    checkProjectsEvery: number;
+    projects: Project[]; // Team projects configs for monitoring health checks
+    checkProjectsEvery: number; // Number of milliseconds for the interval at which to check every project status
 }

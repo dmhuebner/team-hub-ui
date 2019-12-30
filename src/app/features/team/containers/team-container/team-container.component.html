@@ -2,9 +2,15 @@
   <h1>{{teamConfig.name}}</h1>
   <div class="team-row" *ngIf="teamConfig.resources">
     <h4>Links</h4>
-    <app-link-list-container
-            [teamResources]="teamConfig.resources">
-    </app-link-list-container>
+    <div class="team-row-inner-wrapper">
+      <app-link-list-container
+              [teamResources]="teamConfig.resources">
+      </app-link-list-container>
+      <div class="description-container">
+        <h4>Description</h4>
+        <p>{{teamConfig.description}}</p>
+      </div>
+    </div>
   </div>
   <div class="team-row" *ngIf="teamConfig.members">
     <h4>Team Members</h4>

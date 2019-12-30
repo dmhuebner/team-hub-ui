@@ -22,6 +22,7 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject<boolean>();
   dependencyNavRef: string[] = [];
   projectsMonitorOn: boolean;
+  projectStatuses: ProjectStatus[];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -91,6 +92,7 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
   private getProjectStatus(): Observable<ProjectStatus> {
     return this.statusService.projectsStatusMonitor$.pipe(
         map(statusOverview => {
+          this.projectStatuses = Object.values(statusOverview);
           const routeParams = this.route.snapshot.paramMap.keys;
           const dependencyList = routeParams.map(param => this.route.snapshot.paramMap.get(param));
           return dependencyList.reduce((status, dep, i) => {

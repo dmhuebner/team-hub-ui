@@ -16,7 +16,6 @@ export class ProjectDetailsComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    console.log('projectDetails: projectStatus: ', this.projectStatus);
   }
 
 }

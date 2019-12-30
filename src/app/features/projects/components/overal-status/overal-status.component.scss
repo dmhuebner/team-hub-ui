@@ -1,0 +1,23 @@
+@import "src/styles";
+
+.status-overview-banner {
+  margin: 0 0 1.5rem 0;
+  padding: 1rem;
+  color: #ededed;
+  @include border-radius(10px);
+  font-size: 1.1rem;
+  text-align: center;
+  font-weight: bold;
+
+  &.up {
+    background-color: rgb(0, 128, 0);
+  }
+
+  &.warning {
+    background-color: rgb(255, 165, 0);
+  }
+
+  &.down {
+    background-color: rgb(255, 0, 0);
+  }
+}

@@ -53,7 +53,7 @@ export class ProjectStatusService {
     }
 
     startMonitoring(projects: Project[], intervalLength) {
-        console.log('Started monitoring projects - [see Debug logs for details]');
+        console.log('Monitoring projects - [see Debug logs for details]');
         this.projectsMonitorSocketSubject.next({projects, intervalLength});
     }
 

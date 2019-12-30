@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ProjectConfigService } from '../../services/project-config.service';
 import ProjectsStatusOverview from '../../interfaces/projects-status-overview.interface';
+import ProjectStatus from '../../interfaces/project-status.interface';
 
 @Component({
   selector: 'app-projects-container',
@@ -17,6 +18,7 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
   @Input() intervalLength: number;
 
   projectsStatusOverview: ProjectsStatusOverview;
+  projectStatuses: ProjectStatus[];
   unsubscribe$: Subject<boolean> = new Subject();
   projectsMonitorOn: boolean;
 
@@ -63,6 +65,7 @@ export class ProjectsContainerComponent implements OnInit, OnDestroy {
     ).subscribe(msgToClient => {
       console.debug('Projects Statuses', msgToClient);
       this.projectsStatusOverview = msgToClient;
+      this.projectStatuses = Object.values(this.projectsStatusOverview);
     });
   }
 

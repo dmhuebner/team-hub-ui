@@ -22,6 +22,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProjectLinksComponent } from './components/project-links/project-links.component';
 import { JsonParsePipe } from './pipes/json-parse.pipe';
 import { SuccessResponseBodyComponent } from './components/success-response-body/success-response-body.component';
+import { OveralStatusComponent } from './components/overal-status/overal-status.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SuccessResponseBodyComponent } from './components/success-response-body
       DependencyVisContainerComponent,
       ProjectLinksComponent,
       JsonParsePipe,
-      SuccessResponseBodyComponent
+      SuccessResponseBodyComponent,
+      OveralStatusComponent
   ],
     imports: [
         CommonModule,

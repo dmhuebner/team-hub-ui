@@ -1,3 +1,33 @@
 .team-row {
-  margin-top: 4rem;
+  margin-top: 3rem;
+
+  .team-row-inner-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .description-container {
+      margin-left: 0;
+      margin-top: 2rem;
+
+      p {
+        margin-left: 1rem;
+      }
+    }
+  }
+}
+
+/* Larger than mobile */
+@media all and (min-width: 675px) {
+  .team-row {
+    margin-left: 3rem;
+
+    .team-row-inner-wrapper {
+      flex-direction: row;
+
+      .description-container {
+        margin-left: 4rem;
+        margin-top: 0;
+      }
+    }
+  }
 }

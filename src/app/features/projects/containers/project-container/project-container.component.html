@@ -1,3 +1,7 @@
+<app-overal-status
+        *ngIf="projectsMonitorOn"
+        [projectStatuses]="projectStatuses">
+</app-overal-status>
 <ng-container *ngIf="project">
   <h6 class="banner monitor-is-off"
       *ngIf="!(statusService.projectsMonitorOn$ | async)">

@@ -193,7 +193,7 @@
                   "successStatuses": [403],
                   "successResponseBody": {
                     "type": "string",
-                    "responseBodyContains": "failed"
+                    "responseBodyContains": ["failed", "403"]
                   }
                 },
                 "method": "GET"
@@ -217,7 +217,23 @@
                   "successStatuses": [404],
                   "successResponseBody": {
                     "type": "string",
-                    "responseBodyContains": "404"
+                    "responseBodyContains": ["404"]
+                  }
+                },
+                "method": "GET"
+              },
+              {
+                "name": "github api check 4",
+                "path": "http://localhost:3001/foo",
+                "successCriteria": {
+                  "successStatuses": [200],
+                  "successResponseBody": {
+                    "type": "json",
+                    "responseBodyContains": [
+                      {"property": "foo.stuff.thing", "expectedValue": true},
+                      {"property": "status", "expectedValue": "ok"},
+                      {"property": "foo.moreStuff.evenMore", "expectedValue": "some sentence like this"}
+                    ]
                   }
                 },
                 "method": "GET"

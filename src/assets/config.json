@@ -20,6 +20,11 @@
         "description": "Team Documentation"
       },
       {
+        "url": "https://jenkins.com/some-team",
+        "name": "Jenkins",
+        "description": "Project Deployments"
+      },
+      {
         "url": "https://slack.com/some-team",
         "name": "Slack",
         "description": "Team Chat"

@@ -60,6 +60,19 @@
         "email": "joe.shmo@gmail.com"
       }
     ],
+    "loginForToken": {
+      "tokenType": "Bearer",
+      "path": "http://localhost:3001/token",
+      "method": "POST",
+      "requestBody": {
+        "username": "username",
+        "password": "password"
+      },
+      "headers": {
+        "Authorization": "Basic 5s6f7dh8dfgdfi=="
+      },
+      "tokenLocationInResponse": "security.creds.token"
+    },
     "projects": [
       {
         "name": "Pomodor",
@@ -82,7 +95,8 @@
             "headers": {
               "Authorization": "basic 5678765789asdsdfgdshf==",
               "Content-Type": "application/json"
-            }
+            },
+            "useGeneralToken": true
           }
         ],
         "dependencies": [
@@ -118,7 +132,8 @@
                     "headers": {
                       "Authorization": "basic 5678765789asdsdfgdshf==",
                       "Content-Type": "application/json"
-                    }
+                    },
+                    "useGeneralToken": true
                   }
                 ],
                 "dependencies": [
@@ -143,7 +158,8 @@
                         "headers": {
                           "Authorization": "basic 5678765789asdsdfgdshf==",
                           "Content-Type": "application/json"
-                        }
+                        },
+                        "useGeneralToken": true
                       }
                     ],
                     "dependencies": []
@@ -346,7 +362,8 @@
             "successCriteria": {
               "successStatuses": [200]
             },
-            "method": "GET"
+            "method": "GET",
+            "useGeneralToken": true
           }
         ],
         "dependencies": [

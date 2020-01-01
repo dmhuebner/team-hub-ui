@@ -7,6 +7,7 @@ import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ProjectStatusService } from '../../services/project-status.service';
 import { Location } from '@angular/common';
 import ProjectStatus from '../../interfaces/project-status.interface';
+import LoginForToken from '../../../../shared/interfaces/login-for-token.interface';
 
 @Component({
   selector: 'app-project-container',
@@ -17,6 +18,7 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
 
   project: Project;
   projectsConfig: Project[];
+  loginForToken: LoginForToken;
   intervalLength: number;
   projectsStatus: ProjectStatus;
   unsubscribe$ = new Subject<boolean>();
@@ -35,13 +37,14 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
         tap(projectsConfig => {
           this.projectsConfig = projectsConfig.projects;
           this.intervalLength = projectsConfig.intervalLength;
+          this.loginForToken = projectsConfig.loginForToken;
         }),
         map(projectsConfig => this.getProject(projectsConfig.projects)),
         tap(project => this.project = project),
         switchMap(() => this.statusService.projectsMonitorOn$),
         tap(projMonitorOn => {
           if (this.projectsConfig && this.intervalLength && !this.projectsMonitorOn && projMonitorOn) {
-            this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
+            this.statusService.startMonitoring(this.projectsConfig, this.intervalLength, this.loginForToken);
           }
           this.projectsMonitorOn = projMonitorOn;
         }),
@@ -69,7 +72,7 @@ export class ProjectContainerComponent implements OnInit, OnDestroy {
 
   startMonitoringProjects(): void {
     this.projectsMonitorOn = true;
-    this.statusService.startMonitoring(this.projectsConfig, this.intervalLength);
+    this.statusService.startMonitoring(this.projectsConfig, this.intervalLength, this.loginForToken);
   }
 
   private getProject(projects: Project[]): Project {

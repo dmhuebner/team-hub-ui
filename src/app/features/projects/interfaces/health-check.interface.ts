@@ -10,4 +10,6 @@ export default interface HealthCheck {
     successCriteria: HealthCheckSuccessCriteria; // The success criteria for this health check
                                                 // Under what conditions should the project be considered up?
     headers?: HealthCheckHeaders; // Any request headers for this health check
+    useGeneralToken: boolean; // Determines whether this health check should use the general token to authenticate
+                            // (from the config.loginForToken - optional)
 }

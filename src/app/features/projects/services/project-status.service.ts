@@ -52,9 +52,9 @@ export class ProjectStatusService {
         );
     }
 
-    startMonitoring(projects: Project[], intervalLength) {
+    startMonitoring(projects: Project[], intervalLength, loginForToken) {
         console.log('Monitoring projects - [see Debug logs for details]');
-        this.projectsMonitorSocketSubject.next({projects, intervalLength});
+        this.projectsMonitorSocketSubject.next({projects, intervalLength, loginForToken});
     }
 
     stopMonitoring() {

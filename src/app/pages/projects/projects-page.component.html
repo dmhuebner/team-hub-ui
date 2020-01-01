@@ -2,7 +2,8 @@
   <ng-container *ngIf="configService.currentConfig$ | async as currentConfig">
       <app-projects-shell
               [projectsConfig]="currentConfig.team.projects"
-              [intervalLength]="currentConfig.team.checkProjectsEvery">
+              [intervalLength]="currentConfig.team.checkProjectsEvery"
+              [loginForTokenConfig]="currentConfig.team.loginForToken">
       </app-projects-shell>
   </ng-container>
 </section>

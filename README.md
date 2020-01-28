@@ -1,9 +1,10 @@
 # Team Hub
 
-A configurable dev team board that gives visibility and tools into everything that dev team might need
+A configuration driven dev team dashboard that provides organized access to team resources and a projects monitoring tool. team-hub-ui takes a JSON configuration object that drives all of its functionality.
+
+team-hub-ui works in tandem with team-hub-api - the corresponding websockets server.
 
 ## Project Setup
-
 ```
 npm install
 ```
@@ -25,17 +26,19 @@ docker run --name team-hub-ui -p 4200:4200 team-hub-ui:dev
 docker run -d --name team-hub-ui -p 4200:4200 team-hub-ui:dev
 ```
 
-## Development server
+## Development
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This project requires the corresponding websockets server: **team-hub-api**.
 
-## Code scaffolding
+team-hub-ui is an Angular project that provides the configurable front end of Team Hub. The configuration JSON file is in team-hub-ui/src/assets/config.json.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+team-hub-api is a Nest.js project that provides a websockets server that processes the configuration JSON object from the front end. It monitors the team projects (and any dependencies) as specified in the config file.
+
+During development you can either run both the team-hub-ui and team-hub-api projects separately, or you can use the team-hub project on my github to spin them both up in their respective docker containers with docker-compose.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+TODO
 
 ## Running unit tests
 
@@ -47,4 +50,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+TODO

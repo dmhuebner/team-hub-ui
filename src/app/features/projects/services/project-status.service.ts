@@ -63,24 +63,26 @@ export class ProjectStatusService {
     }
 
     private openNotification(projectsStatus: ProjectsStatusOverview) {
-        let msg = 'STATUS UPDATE';
-        const warning = Object.values(projectsStatus).some(status => status.warning);
-        const down = Object.values(projectsStatus).every(status => !status.up);
-        let statusClass = 'snackbar-status-update-up';
-        if (warning && !down) {
-            statusClass = 'snackbar-status-update-warning';
-            msg += ' - Something is down 😯';
-        } else if (down) {
-            statusClass = 'snackbar-status-update-down';
-            msg += ' - All projects are down!! 😭';
-        } else {
-            msg += ' - Projects are Up 👍';
+        if (projectsStatus) {
+            let msg = 'STATUS UPDATE';
+            const warning = Object.values(projectsStatus).some(status => status.warning);
+            const down = Object.values(projectsStatus).every(status => !status.up);
+            let statusClass = 'snackbar-status-update-up';
+            if (warning && !down) {
+                statusClass = 'snackbar-status-update-warning';
+                msg += ' - Something is down 😯';
+            } else if (down) {
+                statusClass = 'snackbar-status-update-down';
+                msg += ' - All projects are down!! 😭';
+            } else {
+                msg += ' - Projects are Up 👍';
+            }
+            this.snackBar.open(msg, null, {
+                duration: 5000,
+                verticalPosition: 'top',
+                panelClass: ['snackbar-status-update', statusClass]
+            });
         }
-        this.snackBar.open(msg, null, {
-            duration: 5000,
-            verticalPosition: 'top',
-            panelClass: ['snackbar-status-update', statusClass]
-        });
     }
 
 

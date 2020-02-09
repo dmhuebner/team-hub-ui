@@ -5,9 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TimerPipe implements PipeTransform {
 
-  transform(milliseconds: any, args?: any): any {
-    if (milliseconds) {
-      const seconds = milliseconds / 1000;
+  transform(seconds: any, args?: any): any {
+    if (seconds) {
       const wholeSeconds = Math.floor(seconds);
       const minutes = Math.floor(seconds / 60);
       const hours = Math.floor(minutes / 60);

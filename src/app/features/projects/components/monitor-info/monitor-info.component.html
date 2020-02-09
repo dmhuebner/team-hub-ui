@@ -1,6 +1,6 @@
 <div class="monitor-info">
   <div *ngIf="monitorOn">
-    Monitoring projects every: <b class="interval-length">{{intervalLength | msToMin}}</b>
+    Monitoring projects every: <b class="interval-length">{{intervalLength | secToMin}}</b>
   </div>
   <div *ngIf="monitorOn" class="projects-monitor-countdown">
     {{monitorCountdown | timer}}
@@ -15,7 +15,7 @@
           (click)="startMonitoringProjects()"
           mat-raised-button
           color="primary">
-    Start monitoring every {{intervalLength | msToMin}}
+    Start monitoring every {{intervalLength | secToMin}}
   </button>
   <span *ngIf="!hasConfig">No Projects Config</span>
 </div>

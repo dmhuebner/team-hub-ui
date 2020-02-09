@@ -1,8 +1,8 @@
-import { MsToMinPipe } from './ms-to-min.pipe';
+import { SecToMinPipe } from './sec-to-min.pipe';
 
 describe('MillisecondsToMinPipe', () => {
   it('create an instance', () => {
-    const pipe = new MsToMinPipe();
+    const pipe = new SecToMinPipe();
     expect(pipe).toBeTruthy();
   });
 });

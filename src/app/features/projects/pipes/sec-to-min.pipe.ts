@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'msToMin'
+  name: 'secToMin'
 })
-export class MsToMinPipe implements PipeTransform {
+export class SecToMinPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
-    let transformedVal = value / 60000;
+    let transformedVal = value / 60;
     if (transformedVal < 1) {
       transformedVal *= 60;
       transformedVal = this.trimIfFraction(transformedVal);
